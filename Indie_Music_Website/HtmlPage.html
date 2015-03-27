@@ -1,0 +1,113 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <link rel="stylesheet" href="css/StyleSheet.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/responsiveslides.css" />
+    <script src="js/jquery.min.js"></script>
+    <script src="js/responsiveslides.js"></script>
+    <script>
+        $(function () {
+            $("#slider").responsiveSlides({
+                auto: true,
+                pager: false,
+                nav: true,
+                speed: 500,
+                maxwidth: 962,
+                namespace: "centered-btns"
+            });
+        });
+    </script>
+    <title></title>
+</head>
+<body>
+    <header>
+        <div><a href="#"><img src="./images/Logo_header.jpg" /></a></div>
+    </header>
+
+    <links>
+        <div class="menu">
+            <ul style=" list-style:none;">
+                <li class="current"><a href="HtmlPage.html">Home</a></li>
+                <li><a href="blog.html">Bands</a></li>
+                <li><a href="gallery.html">New Released</a></li>
+                <li><a href="single.html">Hot Topics</a></li>
+                <li><a href="contact.html">Membership</a></li>
+            </ul>
+        </div>
+    </links>
+
+    <div class="slider">
+        <div class="rslides_container">
+            <ul class="rslides" id="slider">
+                <li><img src="images/slide1.png" /></li>
+                <li><img src="images/slide2.png" /></li>
+                <li><img src="images/slide3.png" /></li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="search" style=" align-content:center;">
+        <input class="search" type="text" value="Search Topics, Bands, or Users you want to know" onfocus="if (this.value == &#39;Search Topics, Bands, or Users you want to know&#39;) {this.value = &#39;&#39;;}" onblur="    if (this.value == &#39;&#39;) {this.value = &#39;Search Topics, Bands, or Users you want to know&#39;;}">
+        <a href="#"><img src="./images/Search_button.jpg" style="top:10px;vertical-align:middle;"></a>
+    </div>
+    
+    <div id="content">
+        
+        <div class="wrap">
+            
+            <div class="block01">
+                <div class="heading"><a href="#"><img src="./images/Community_Logo.jpg"></a></div>
+                <div class="community"><a href="#"><h1>Superman</h1></a></div>
+                <h2>- Last post: 13 mins ago</h2>
+                <div class="topic">
+                    <a href="123"><h3>The Best Song I Ever Heard</h3></a>
+                </div>
+            </div>
+
+            <div class="block02">
+                <div id="cover"><a href="#"><img src="./images/cover1.jpg" style="width:70%;height:auto;"></a></div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="box1">
+            <div class="heading">Like us on</div>
+            <div class="column">
+                <ul style=" list-style:none;">
+                    <li><a href="#"><img src="./images/Bottom_Fackook_Logo.jpg" /></a></li>
+                    <li><a href="#"><img src="./images/Bottom_google+_Logo.jpg" /></a></li>
+                    <li><a href="#"><img src="./images/Bottom_twitter_Logo.jpg" /></a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="box1">
+            <div class="heading">Company</div>
+            <div class="column">
+                <ul style=" list-style:none;">
+                    <li>people</li>
+                    <li>About Us</li>
+                    <li>Contact</li>                  
+                </ul>
+            </div>
+        </div>
+
+        <div class="box1">
+            <div class="heading">Information</div>
+            <div class="column">
+                <ul style=" list-style:none;">
+                    <li>Privacy</li>
+                    <li>Terms</li>
+                    <li>Help</li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright ">© 2015 Indie Music. All Rights Reserved</div>
+        
+    </footer>
+
+                
+</body>
+</html>

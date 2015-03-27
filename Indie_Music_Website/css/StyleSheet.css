@@ -1,0 +1,78 @@
+﻿body {
+    width:1080px;
+    position:relative; margin: 0 auto; padding: 0px;
+    background-color:#eeecec;
+}
+header {
+    background-color:#a4d5f7;
+    height:112px; 
+    font-family:Century Gothic;
+    /*use  font "Calibri" in case */
+    color:#ffffff;     <* this color is for "Log In | Sign Up "*>
+    font-color:#898787     <* this color is for "Sign up for band"*>
+}
+
+/*Bands  Albums  New Released...      */ 
+links{
+    font-family:Century Gothic;
+    /*use  font "Calibri" in case */
+    color:#0c0c0c;    
+}
+
+.menu  ul {list-style: none;margin: 0;padding: 0;}
+.menu  ul li {position: relative;float: left;padding: 6px 5px 0px 5px; margin: 17px;}
+.menu  ul li:hover {background: #a4d5f7;}
+.menu  ul li a {font-size: 16px;font-family:Century Gothic; line-height:20px;color:#0c0c0c;display: block;padding: 6px 10px;margin-bottom: 5px;z-index: 6;position: relative;}
+.menu  ul li:hover a {}
+.menu .current{background: #a4d5f7;}
+
+#search {margin:0 auto;width:700px;height:48px;display:inline;}
+#search input{margin:0 auto;font-family:Georgia;display:inline;background: #FFF;padding: 1px 33px 1px 5px;width: 600px;height: 45px;border: 1px solid #CCCCCC;-webkit-border-radius: 3px;-moz-border-radius: 3px; -khtml-border-radius: 3px;border-radius: 3px;}
+
+
+#content {margin:0 auto; width:960px;}
+#content .wrap{margin:10px;}
+#content .block01 {width:60%;background:white;padding:10px;display: inline-block;}
+#content .block02 {width:30%;background:white;padding:10px;display: inline-block;}
+#content .heading{padding:5px 0px; border-bottom:3px solid #a4d5f7;}
+#content .community {padding:10px;height:50px;display:inline-block;vertical-align:middle;float:left;}
+#content .community span {float:right;}
+#content .topic {height:50px;display:inline-block;vertical-align:middle;float:left;}
+
+#content h1 {font-family:Georgia;font-size:24px;color:black;text-decoration:none;border-bottom:none;}
+#content h2 {font-family:Century Gothic;font-size:16px;color:gray;text-decoration:none;border-bottom:none;vertical-align:bottom}
+#content h3 {font-family:Century Gothic;font-size:20px;color:black;text-decoration:none;border-bottom:none;}
+
+/*Panels: where the white background show in the overview picture*/
+Panel{
+    background-color:#ffffff;
+}
+
+/*--the bar on the top ov the bottom--*/
+bar{
+    background-color:#cbe8fb;
+} 
+
+
+/*Like us on, Company, Information*/
+footer{
+    background-color:#a4d5f7;
+    font-family:Century Gothic;
+ /*use  font "Calibri" in case */;   
+    color:#ffffff;
+    margin:20px;    
+}
+.transition region {}
+.box1 {width:30%;height:300px;padding:10px;display:inline-block;}
+.box1 .heading {font-size:24px;font-weight:normal; display:inline;padding:20px;text-align:center;}
+.box1 .column {margin: 15px 0px ;}
+.box1 .column ul{font-size:18px;margin-bottom:20px;}
+.box1 .column ul li{padding:10px;}
+.copyright{text-align:center; padding:10px 0px;}
+
+/*links style*/
+a:hover   {color:#f25151; background-color:transparent; text-decoration:none}
+a:active  {color:#f25151; background-color:transparent; text-decoration:none}
+
+
+
