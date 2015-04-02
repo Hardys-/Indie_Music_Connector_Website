@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <link rel="stylesheet" href="css/StyleSheet.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/responsiveslides.css" />
+    <script src="js/jquery.min.js"></script>
+    <script src="js/responsiveslides.js"></script>
+    <script>
+        $(function () {
+            $("#slider").responsiveSlides({
+                auto: true,
+                pager: false,
+                nav: true,
+                speed: 500,
+                maxwidth: 962,
+                namespace: "centered-btns"
+            });
+        });
+    </script>
+    <title></title>
+</head>
+<body>
+    <header>
+        <div><a href="#"><img src="./images/Logo_header.jpg" /></a></div>
+    </header>
+
+    <links>
+        <div class="menu">
+            <ul style=" list-style:none;">
+                <li class="current"><a href="Home.htm">Home</a></li>
+                <li><a href="Under_Construction.htm">Bands</a></li>
+                <li><a href="Under_Construction.htm">New Released</a></li>
+                <li><a href="Under_Construction.htm">Hot Topics</a></li>
+                <li><a href="Under_Construction.htm">Membership</a></li>
+            </ul>
+        </div>
+    </links>
+
+    <div class="slider">
+        <div class="rslides_container">
+            <ul class="rslides" id="slider">
+                <li><img src="images/slide1.png" /></li>
+                <li><img src="images/slide2.png" /></li>
+                <li><img src="images/slide3.png" /></li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="search" style=" align-content:center;">
+        <input class="search" type="text" value="Search Topics, Bands, or Users you want to know" onfocus="if (this.value == &#39;Search Topics, Bands, or Users you want to know&#39;) {this.value = &#39;&#39;;}" onblur="    if (this.value == &#39;&#39;) {this.value = &#39;Search Topics, Bands, or Users you want to know&#39;;}">
+        <a href="#"><img src="./images/Search_button.jpg" style="top:10px;vertical-align:middle;"></a>
+    </div>
+    <div id="content" style = "height:600px;">
+        <div style="width:50%;float:left;height:100%;background-color:white;">
+            <div class="heading"><a href="#"><img src="./images/Community_Logo.jpg"></a></div>
+            <div class="community"><a href="#"><h1>Superman</h1></a></div>
+            <h2>- Last post: 13 mins ago</h2>
+            <div class="topic">
+                <a href="123"><h3>The Best Song I Ever Heard</h3></a>
+            </div>
+            <br></br>
+            <br></br>
+            <div class="community"><a href="#"><h1>Gui Boratto</h1></a></div>
+            <h2>- Last post: 26 mins ago</h2>
+            <div class="topic">
+                <a href="123"><h3>The Best Song I Ever Heard #2</h3></a>
+            </div>
+            <br></br>
+        </div>
+        <div style="width:50%;float:right;height:100%;background-color:white;">
+            <img src="./images/cover1.jpg" style="width:70%;height:auto;">
+        </div>
+    </div>
+    <div id"bottom"; style = "float:left;width:33%;height:200px;text-align:center;background-color:#a4d5f7;font:gothic century;">
+        <br font face="Century Gothic";size=120%>Follow Us On</br>
+        <br><a href="http://www.facebook.com/"><img src="./images/Bottom_Fackook_Logo.jpg" style="height:15%;width:35%" /></a></br>
+        <br><a href="http://www.google.com/"><img src="./images/Bottom_google+_Logo.jpg" style="height:15%;width:35%"/></a></br>
+        <br><a href="http://www.twitter.com/"><img src="./images/Bottom_twitter_Logo.jpg"style="height:15%;width:35%" /></a></br>
+    </div>
+    <div id"bottom"; style = "float:left;width:34%;height:200px;text-align:center;background-color:#a4d5f7;">
+        <br font-size=120%>Company</br>
+        <br><a href="About.htm">About Us</a></br>
+        <br><a href="contact.htm">Contact Us</a></br>
+    </div>
+    <div id"bottom"; style = "float:left;width:33%;height:200px;text-align:center;background-color:#a4d5f7;">
+        <br font-size=120%>Help</br>
+        <br>Privacy</br>
+    </div>
+
+
+</body>
+</html>
