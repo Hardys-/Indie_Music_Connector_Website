@@ -9,8 +9,9 @@ html {
 }
 img{
 	max-width:100%;
-	height: auto;
-   	width: auto\9; /* ie8 */
+	height: 143px;
+   	width: auto\9;
+    width: 824px;
 }
 
 @media only screen and (min-width: 768px) and (max-width: 959px) {

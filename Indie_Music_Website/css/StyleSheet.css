@@ -18,7 +18,7 @@ links{
     /*use  font "Calibri" in case */
     color:#0c0c0c;    
 }
-
+.pointercursor {cursor:pointer}
 .menu  ul {list-style: none;margin: 0;padding: 0;height:auto;}
 .menu  ul li {position: relative;float: left;padding: 6px 5px 0px 5px; margin: 17px;}
 .menu  ul li:hover {background: #a4d5f7;}
@@ -27,7 +27,8 @@ links{
 .menu .current{background: #a4d5f7;}
 
 #search {margin:0 60px;width:960px;height:43px;display:inline;text-align:center}
-#search input{font-family:Georgia;background: #FFF;padding: 1px 33px 1px 5px;width: 860px;height: 42px;border: 1px solid #CCCCCC;-webkit-border-radius: 3px;-moz-border-radius: 3px; -khtml-border-radius: 3px;border-radius: 3px;}
+#search input{font-family:Georgia;background: #FFF;padding: 1px 33px 1px 5px;border: 1px solid #CCCCCC;-webkit-border-radius: 3px;-moz-border-radius: 3px; -khtml-border-radius: 3px;border-radius: 3px;
+}
 #search .button{}
 
 
