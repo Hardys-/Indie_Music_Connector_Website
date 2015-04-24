@@ -30,7 +30,7 @@
                 <img src="./images/Logo_header.jpg" />
             </div>
             <div style="float:right; width:auto">
-                <asp:Button ID="LogStatusButton" runat="server" BackColor="#A4D5F7" BorderColor="White" BorderStyle="None" Font-Bold="True" Font-Names="Calibri" Font-Size="Large" ForeColor="White" Text="Log In" OnClick="LogInButton_Click" CssClass="pointercursor" />
+                <asp:Button ID="LogStatusButton" runat="server" BackColor="#A4D5F7" BorderColor="White" BorderStyle="None" Font-Bold="True" Font-Names="Calibri" Font-Size="Large" ForeColor="White" Text="Log In" OnClick="LogStatusButton_Click" CssClass="pointercursor" />
                 <asp:Button ID="SignUpButton" runat="server" BackColor="#A4D5F7" BorderStyle="None" Font-Bold="True" Font-Names="Calibri" Font-Size="Large" ForeColor="White" Text="|    Sign Up" OnClick="SignUpButton_Click" CssClass="pointercursor" />
                      
                 <asp:Panel ID="Panel1" runat="server" BackColor="#a4d5f7" BorderStyle="None" Visible="False">
@@ -45,7 +45,7 @@
                     <asp:TextBox ID="PasswordTextBox" runat="server" BorderStyle="None" Width="111px" ForeColor="#A4D5F7"  TextMode="Password" MaxLength="50"></asp:TextBox>                      
                     </div><br/>
                     <div style="align-items:center;width:auto;float:right;cursor:pointer">
-                    <asp:Button ID="LogInButton" runat="server" Text="Log In &gt;&gt;" BorderColor="White" BorderStyle="None" BackColor="#A4D5F7" Font-Bold="True" Font-Names="Calibri" Font-Size="Medium" ForeColor="White" Width="79px" OnClick="Button1_Click" CssClass="pointercursor" />  
+                    <asp:Button ID="LogInButton" runat="server" Text="Log In &gt;&gt;" BorderColor="White" BorderStyle="None" BackColor="#A4D5F7" Font-Bold="True" Font-Names="Calibri" Font-Size="Medium" ForeColor="White" Width="79px" OnClick="LogInButton_Click" CssClass="pointercursor" />  
                     <div/>
                 </div>
                 </asp:Panel>
@@ -55,7 +55,7 @@
         </div>
     </header><br/><br/>
 
-        <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
+        <asp:Label ID="UserIdLabel" runat="server" Text="Label"></asp:Label>
 
     <links>
         <div class="menu" style>

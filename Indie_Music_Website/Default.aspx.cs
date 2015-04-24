@@ -10,16 +10,17 @@ using System.Web.UI.WebControls;
 
 public partial class _Default : System.Web.UI.Page
 {
-    string U = ""; //U for tracking the user who Logged in
+    string U ="" ; //U for tracking the user who Logged in
 
-    protected void TryLogin(string id, string pw) // user id(email) and user password
+    protected void TryLogin(string Email, string pw) // user id(email) and user password
     {
         try
         {
             string DBName = "";
             string DBPW = "";
+            string UserId = ""; //only in SQL search to check if user id existed
             String connect = "Data Source=(LocalDB)\\v11.0;AttachDbFilename=|DataDirectory|\\Database.mdf;Integrated Security=True";//connect to our database
-            String SQLNamePW = String.Format("SELECT Name,PW FROM Users WHERE (Email) = '{0}'", id); //get the password and username
+            String SQLNamePW = String.Format("SELECT Id,Name,PW FROM Users WHERE (Email) = '{0}'", Email); //get the password and username
             using (SqlConnection conn = new SqlConnection(connect))
             using (SqlCommand cmd = new SqlCommand(SQLNamePW, conn))
             {
@@ -29,16 +30,18 @@ public partial class _Default : System.Web.UI.Page
                 {
                     DBName = reader["Name"].ToString();   //get the Name in DB
                     DBPW = reader["PW"].ToString();       //get the pasword in DB
+                    UserId = reader["Id"].ToString();
                 }
                 conn.Close();
             }
             if (DBPW == pw)    // correct infomation
             {
-                U = id;   //U != "" means that user has logged in
+                U = UserId;   //U != "" means that user has logged in
                 LogStatusButton.Text = DBName;     //display user name
                 LogStatusButton.ForeColor = ColorTranslator.FromHtml("#fd5b5b");
                 SignUpButton.Text = "|  Log Out";
                 Panel1.Visible = false;
+                UserIdLabel.Text = U ;
             }
             else 
             {
@@ -58,7 +61,7 @@ public partial class _Default : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         //page redirection check for UserID
-        U = string.Format("{0}", Request.QueryString["U"]);
+        if(U == "") { U = string.Format("{0}", Request.QueryString["U"]);}
         string Name = string.Format("{0}", Request.QueryString["Name"]);
         if(U !="" && Name != "") // information found
         {
@@ -78,10 +81,16 @@ public partial class _Default : System.Web.UI.Page
     }
 
 
-    protected void LogInButton_Click(object sender, EventArgs e)
+    protected void LogStatusButton_Click(object sender, EventArgs e)
     {
         //check if logged in 
-        if (U == "" && LogStatusButton.Text == "Log In") Panel1.Visible = true;
+        
+        if (U == "" && LogStatusButton.Text == "Log In") { Panel1.Visible = true;} // not login
+        else if (UserIdLabel.Text != ""  &&  LogStatusButton.Text != "Log In") //already login
+        {
+            string UserURL = string.Format("UserProfile.aspx?U={0}&Name={1}", UserIdLabel.Text, LogStatusButton.Text);//redirect to user page
+            Response.Redirect(UserURL);
+        }
     }
 
 
@@ -101,7 +110,7 @@ public partial class _Default : System.Web.UI.Page
     }
 
 
-    protected void Button1_Click(object sender, EventArgs e)
+    protected void LogInButton_Click(object sender, EventArgs e)
     {
         string user = UserNameTextBox.Text;
         string pw =  PasswordTextBox.Text;

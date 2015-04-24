@@ -16,7 +16,7 @@
             <ul style=" list-style:none;">
                 <li><a href="Default.aspx">Home</a></li>
                 <li class="current"><a href="Bands.aspx">Bands</a></li>
-                <li><a href="Topiclist.aspx">Hot Topics</a></li>
+                <li><a href="Topiclist.aspx">Topics</a></li>
                 <li><a href="Popular.aspx">The Popular...</a></li>
             </ul>
         </div>

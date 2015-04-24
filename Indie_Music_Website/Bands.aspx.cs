@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -60,9 +60,9 @@ public partial class Bands : System.Web.UI.Page
                 string URL = string.Format("BandProfile.aspx?Id={0}&Name={1}", dr["Id"].ToString(), dr["Name"].ToString());               
                 string ProfilePic = dr["Pic"].ToString();
 
-                BandInfo.Text = 
-                    "<div style=\"float:left; width: auto\"><div style=\"float:left; width: 20%; margin-left:10px;\"><br/><img src=\"" 
-                    + ProfilePic + "\" width=\"100\" height=\"100\" /><br/><a href=\"" + URL + "\">" +
+                BandInfo.Text =
+                    "<div style=\"float:left; width: auto\"><div style=\"float:left; width: 20%; margin-left:10px;\"><br/><a href=\"" + URL + "\"><img src=\"" 
+                    + ProfilePic + "\" width=\"100\" height=\"100\" /><br/>" +
                     dr["Name"].ToString() + "</a><br/><font style=\"font-size:10px;\">" + 
                     "Est. " + dr["EstTime"].ToString() +
                     "<br/>Followers: " + dr["Followers"].ToString() + "</font></div> <div style=\"float:left;width: 75%\"><br/>" +

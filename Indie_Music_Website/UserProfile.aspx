@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="BandProfile.aspx.cs" Inherits="BandProfile" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="UserProfile.aspx.cs" Inherits="UserProfile" %>
   
 <!DOCTYPE html>
 
@@ -27,9 +27,16 @@
     <br/><br/>
     <div style="background-color:#ffffff; float:left;margin-left:2%; width:100%">
 
+        <div>
+            <asp:Table ID="UserTable" runat="server" BorderStyle="None" BorderWidth="0px" HorizontalAlign="Center" Width="243px">
+            </asp:Table>
+        </div>
 
-
-        <br/><br/><br/><br/><br/>
+        <br/><br/>
+        <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
+        <br/>
+        <asp:SqlDataSource ID="DSUser" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT * FROM [Users]"></asp:SqlDataSource>
+        <br/><br/>
     </div>
         
     <footer><br/>
