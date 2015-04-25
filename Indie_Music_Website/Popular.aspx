@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="BandProfile.aspx.cs" Inherits="BandProfile" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Popular.aspx.cs" Inherits="Popular" %>
   
 <!DOCTYPE html>
 

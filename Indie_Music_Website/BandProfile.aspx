@@ -1,14 +1,14 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="BandProfile.aspx.cs" Inherits="BandProfile" %>
-  
+
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head>
+<head runat="server">
     <link rel="stylesheet" href="css/StyleSheet.css"/>
     <title>Band Profile</title>
 </head>
 <body>
-    <form id="form2" runat="server">
+    <form id="form1" runat="server">
     <header>
         <div><a href="#"><img src="./images/Logo_header.jpg" /></a></div>
     </header>
@@ -23,17 +23,19 @@
             </ul>
         </div>
         <br/><br/>
-    </links>
-    <br/><br/>
-    <div style="background-color:#ffffff; float:left;margin-left:2%; width:95%">
+    </links><br/><br/>
 
-
-
-        <br/><br/>
-        <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Button" />
-        <br/><br/><br/>
+    <div style="background-color:#ffffff; float:left;margin-left:2%; width:98%">
+        <div>
+            <asp:Table ID="BandTable" runat="server" BorderStyle="None" BorderWidth="0px" HorizontalAlign="Center" Width="243px"> </asp:Table>
+        </div>
+        <br/><br/><br/><p style="font-size:18px">Grenn Day</p>
     </div>
         
+    <div>
+    <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Button" />
+    </div>
+
     <footer><br/>
         <div class="box">
             <div class="box1">
@@ -70,8 +72,7 @@
             </div>
         </div>
         <div class="copyright ">© 2015 Indie Music. All Rights Reserved</div>
-
-    </footer>
+    </footer>       
     </form>
 </body>
 </html>

@@ -25,7 +25,7 @@
         <br/><br/>
     </links>
     <br/><br/>
-    <div style="background-color:#ffffff; float:left;margin-left:2%; width:100%">
+    <div style="background-color:#ffffff; float:left;margin-left:2%; width:98%">
 
         <div>
             <asp:Table ID="UserTable" runat="server" BorderStyle="None" BorderWidth="0px" HorizontalAlign="Center" Width="243px">

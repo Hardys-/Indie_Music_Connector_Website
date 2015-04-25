@@ -15,20 +15,19 @@ public partial class UserProfile : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        Label1.Text = "pahse10";
 
         U = string.Format("{0}", Request.QueryString["U"]);         //get the User Id
         Name = string.Format("{0}", Request.QueryString["Name"]);
-        Label1.Text = U + " "+ Name ;
+
 
         /*Searching User Information*/
         string DBEmail = "";
         string DBName = "";
         string DBGender = "";
         string DBPic = "";
-        string DBDOB = "";
         string DBFriends = "";
-        string DBRegTime = "";
+        string dateString1 = "1/1/1970 00:00:00 AM";
+        string dateString2 = "1/1/1970 00:00:00 AM";
         String connect = "Data Source=(LocalDB)\\v11.0;AttachDbFilename=|DataDirectory|\\Database.mdf;Integrated Security=True";//connect to our database
         String SQLUser= String.Format("SELECT * FROM Users WHERE (Id) = '{0}' AND (Name) = '{1}'", U, Name); //get the password and username
         using (SqlConnection conn = new SqlConnection(connect))
@@ -43,15 +42,34 @@ public partial class UserProfile : System.Web.UI.Page
                 DBName = reader["Name"].ToString();   //get the Name in DB
                 DBGender = reader["Gender"].ToString();       //get the Gender in DB
                 DBPic = reader["Pic"].ToString();
-                s = reader["DOB"].ToString();
-                DBDOB = s.Substring(0, s.IndexOf(" ")); // only copy the date 
+                dateString1 = reader["DOB"].ToString();
                 DBFriends = reader["Friends"].ToString();
-                s = reader["RegTime"].ToString();
-                DBRegTime = s.Substring(0, s.IndexOf(" "));// only copy the date 
+                dateString2 = reader["RegTime"].ToString();
+
             }
             conn.Close();
         } 
         if( DBPic == "" ){DBPic = "/images/UserProfile/Default.jpg";} // if user did not upload profile pic
+       
+        /*Searching Friends information*/
+        String SQLFriend = String.Format("SELECT AlbumName, Cover, PublishedYear FROM Album WHERE (BandName) = '{0}'", DBName); //get the album published by this band
+        using (SqlConnection conn = new SqlConnection(connect))
+        using (SqlCommand cmd = new SqlCommand(SQLAlbum, conn))
+        {
+            conn.Open();
+            SqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())     //get all Album information need to be displaied in this page
+            {
+                /*Wrap up deta type */
+                string AlbumDateString = reader[2].ToString();
+                DateTime DBAlbumDateTime = DateTime.Parse(AlbumDateString, System.Globalization.CultureInfo.InvariantCulture);
+                string DBAlbumDate = DBAlbumDateTime.Year.ToString() + "-" + DBAlbumDateTime.Month.ToString() + "-" + DBAlbumDateTime.Day.ToString();
+                /*Wrap up deta type */
+
+                DBAlbum += "<img src=\"" + reader[1].ToString() + "\" width=\"35\" height=\"35\" />&nbsp;" + reader[0].ToString() + "&nbsp;<div style=\"font-size:8px\">" + DBAlbumDate + "<br/><br/></div>";
+            }
+            conn.Close();
+        }
         /*search ending*/
 
         /*display user's information*/
@@ -71,14 +89,16 @@ public partial class UserProfile : System.Web.UI.Page
         UserInfo.BackColor = ColorTranslator.FromHtml("#4498d2");
         UserInfo.ForeColor = ColorTranslator.FromHtml("#ffffff");
         UserInfo.HorizontalAlign = HorizontalAlign.Left;
-        UserInfo.Font.Name = "Calibri";        
+        UserInfo.Font.Name = "Calibri";
+        DateTime DBDOB = DateTime.Parse(dateString1, System.Globalization.CultureInfo.InvariantCulture); //assign a date type to the string captured in database
+        DateTime DBRegTime = DateTime.Parse(dateString2, System.Globalization.CultureInfo.InvariantCulture); //assign a date type to the string captured in database
 
         UserInfo.Text =
             "<div style=\"float:left; width: auto\"><div style=\"float:left; width: 35%; margin-left:10px;\"><br/><img src=\""
             + DBPic + "\" width=\"100\" height=\"100\" /><br/>" +
             DBName + "</a><br/></div> <div style=\"float:left; margin-left: 30px; width: 50%\"><br/>"
             + "Followers: " + DBFriends + "<br/> Email: " + DBEmail + "<br/> Gender: " + DBGender +
-            "<br/> Birthday:  " + DBDOB + "<br/> Est. " + DBRegTime +
+            "<br/> Birthday:  " + DBDOB.Date.ToString() + "<br/> Est. " + DBRegTime.Date.ToString() +
             " </div></div><br/><br/>";
 
         row.Cells.Add(UserInfo);
