@@ -25,11 +25,23 @@
         <br/><br/>
     </links>
     <br/><br/>
-    <div style="background-color:#ffffff; float:left;margin-left:2%; width:95%">
+    <div style="background-color:#ffffff; float:left;margin-left:20px; width:95%">
         <br/><br/>
-        <asp:Table ID="Table1" runat="server" BorderStyle="None" BorderWidth="0px" HorizontalAlign="Center" Width="797px" CellPadding="2" CellSpacing="2" Font-Names="Calibri" Font-Size="Medium" style="margin-left: 0px">
+
+        <div>
+        <asp:Table ID="Table1" runat="server" BorderStyle="None" BorderWidth="0px" HorizontalAlign="Center" Width="468px" Font-Names="Calibri" Font-Size="Medium" style="margin-left: 0px">
         </asp:Table>
-        <br/><br/><br/>
+        </div>
+
+        <br/><br/>
+        <asp:Panel ID="Panel1" runat="server">
+            <asp:TextBox ID="PostTextBox" runat="server" BorderColor="#A4D5F7" BorderStyle="Solid" Height="78px" TextMode="MultiLine" Width="616px"></asp:TextBox>
+            <br />
+            <br />
+            <asp:Button ID="PostCommentButton" runat="server" BackColor="White" BorderColor="#A4D5F7" BorderStyle="Solid" Font-Bold="True" Font-Names="Calibri" ForeColor="#4498D2" Text="Post Comment" />
+            <br />
+        </asp:Panel>
+        <br/>
         <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT * FROM [Comments]"></asp:SqlDataSource>
     </div>
         

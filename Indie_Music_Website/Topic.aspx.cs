@@ -12,6 +12,7 @@ public partial class Topic : System.Web.UI.Page
 {
     string Id = "";
     string Name = "";
+    string TopicTitle = "";
 
      protected void RequestbyID(string id)
     {
@@ -19,7 +20,7 @@ public partial class Topic : System.Web.UI.Page
         {
             int i = 0; 
             String connect = "Data Source=(LocalDB)\\v11.0;AttachDbFilename=|DataDirectory|\\Database.mdf;Integrated Security=True";
-            String sql1 = String.Format("SELECT OwnerName,Content,PostTime FROM Comments WHERE (TopicId) = '{0}'", id); //get the content of the same topic id
+            String sql1 = String.Format("SELECT OwnerId, OwnerName,Content,PostTime FROM Comments WHERE (TopicId) = '{0}'", id); //get the content of the same topic id
             using (SqlConnection conn = new SqlConnection(connect))
             using (SqlCommand cmd = new SqlCommand(sql1, conn))
             {
@@ -29,45 +30,33 @@ public partial class Topic : System.Web.UI.Page
                 {
                     i++;
                     TableRow row = new TableRow();
-                    TableCell item0 = new TableCell();
-                    TableCell item1 = new TableCell();
-                    TableCell item2 = new TableCell();
-                    item0.Text = "<br/>" + reader["OwnerName"].ToString() + "<br/><br/>";
-                    item1.Text ="<br/>"+reader["Content"].ToString()+"<br/><br/>";
-                    item2.Text = "<br/>" + reader["PostTime"].ToString() + "<br/><br/>";
-                    item2.Font.Size = 8;
+                    TableCell Content = new TableCell();
 
+                    string UserURL = "<a href=\"" + string.Format("UserProfile.aspx?U={0}&Name={1}", reader["OwnerId"].ToString(), reader["OwnerName"].ToString()) + " \" target=\"_blank\">";//Open user page in new tab
+
+                    Content.Text = UserURL + "<img src=\"" + GetPicById(int.Parse(reader["OwnerId"].ToString())) + "\" width=\"15\" height=\"15\"/> &nbsp;"
+                                    + reader["OwnerName"].ToString() + "</a><br/><br/>"                 //Post owner Info
+                                    + reader["Content"].ToString() + "</a><br/><br/>"              // Topic comments
+                                    + "<div style=\"font-size:10px\"> Posted at: " + reader["PostTime"].ToString() + "</div><br/>";  // Post time
+     
                     if (i % 2 == 0)           //dynamic background color even-> black & odd -> grey
                     {
-                        item2.BackColor = ColorTranslator.FromHtml("#434343");   //Transfer HEX value color 
-                        item1.BackColor = ColorTranslator.FromHtml("#434343");
-                        item0.BackColor = ColorTranslator.FromHtml("#434343");
-                        item2.ForeColor = ColorTranslator.FromHtml("#ffffff");
-                        item1.ForeColor = ColorTranslator.FromHtml("#ffffff");
-                        item0.ForeColor = ColorTranslator.FromHtml("#ffffff");
+                        Content.BackColor = ColorTranslator.FromHtml("#ffffff");   //Transfer HEX value color 
+                        Content.ForeColor = ColorTranslator.FromHtml("#000000");
                     }
                     else 
                     {
-                        item2.BackColor = ColorTranslator.FromHtml("#dcdcdc");
-                        item1.BackColor = ColorTranslator.FromHtml("#dcdcdc");
-                        item0.BackColor = ColorTranslator.FromHtml("#dcdcdc");
-                        item2.ForeColor = ColorTranslator.FromHtml("#080808");
-                        item1.ForeColor = ColorTranslator.FromHtml("#080808");
-                        item0.ForeColor = ColorTranslator.FromHtml("#080808");
+                        Content.BackColor = ColorTranslator.FromHtml("#ece9e9");
+                        Content.ForeColor = ColorTranslator.FromHtml("#000000");
                     }
 
-                    item0.Width = 120;
-                    item0.HorizontalAlign = HorizontalAlign.Left;
-                    item0.VerticalAlign = VerticalAlign.Top;
-                    item2.Width = 100; 
-                    item2.HorizontalAlign = HorizontalAlign.Center;
-                    item2.VerticalAlign = VerticalAlign.Top;
-                    row.Cells.Add(item0);
-                    row.Cells.Add(item1);
-                    row.Cells.Add(item2);                   
+                    Content.HorizontalAlign = HorizontalAlign.Left;
+                    Content.Font.Name = "Calibri";
+
+                    row.Cells.Add(Content);                   
                     Table1.Rows.Add(row);
-                    Table1.CellPadding = 6;                      // Content Indent
-                    Table1.Style.Add("width", "90% !important"); // Inline percentage of table width
+                    Table1.CellPadding = 15;                      // Content Indent
+                    Table1.Style.Add("width", "95% !important");  // Inline percentage of table width
                     
                 }
                 conn.Close();
@@ -96,10 +85,42 @@ public partial class Topic : System.Web.UI.Page
         }
     }
 
+    protected string GetPicById(int UserID) 
+    {
+        string SQLResult = "";
+        String connect = "Data Source=(LocalDB)\\v11.0;AttachDbFilename=|DataDirectory|\\Database.mdf;Integrated Security=True";//connect to our database
+        String SQLFriend = String.Format("SELECT Pic FROM Users WHERE Id = '{0}'",UserID); //get the Picture of the user
+        using (SqlConnection conn = new SqlConnection(connect))
+        using (SqlCommand cmd = new SqlCommand(SQLFriend, conn))
+        {
+            conn.Open();
+            SqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())     //get all Album information need to be displaied in this page
+            {
+                SQLResult = reader["Pic"].ToString();
+               
+            }
+            conn.Close();
+        }
+
+        return SQLResult;
+    }
+
     protected void Page_Load(object sender, EventArgs e)
     {
         Id = string.Format("{0}", Request.QueryString["Id"]);         //get the topic Id
-        Name = string.Format("{0}",  Request.QueryString["Name"]);
+        Name = string.Format("{0}",  Request.QueryString["Name"]);    // get the user Name
+        TopicTitle = string.Format("{0}", Request.QueryString["Title"]);  //get the Topic Title
+        TableHeaderRow Header = new TableHeaderRow();
+        TableCell HeaderContent = new TableCell();
+        Header.ForeColor = ColorTranslator.FromHtml("#a4d5f7");
+        Header.Font.Bold = true;
+        Header.Font.Name = "Calibri";
+        HeaderContent.Text ="--"+TopicTitle+"-- Posted by:  "+ Name;              //List of each topic
+        HeaderContent.HorizontalAlign = HorizontalAlign.Left;
+        Header.Cells.Add(HeaderContent);
+        Table1.Rows.Add(Header);
+        
         if (Id != "") { RequestbyID(Id); }    //need to add an access check
     }
 }

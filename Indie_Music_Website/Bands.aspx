@@ -3,18 +3,18 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <link rel="stylesheet" href="css/StyleSheet.css">
+    <link rel="stylesheet" href="css/StyleSheet.css"/>
     <title>Band List</title>
 </head>
 <body>
     <header>
-        <div><a href="#"><img src="./images/Logo_header.jpg" /></a></div>
+        <div><a href="#"><img src="./images/Logo_header.jpg"/></a></div>
     </header>
 
     <links>
         <div class="menu" >
             <ul style=" list-style:none;">
-                <li><a href="Default.aspx">Home</a></li>
+                <li><a href="Default.aspx" >Home</a></li>
                 <li class="current"><a href="Bands.aspx">Bands</a></li>
                 <li><a href="Topiclist.aspx">Topics</a></li>
                 <li><a href="Popular.aspx">The Popular...</a></li>

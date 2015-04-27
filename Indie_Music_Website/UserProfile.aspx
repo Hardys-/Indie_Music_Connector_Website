@@ -195,10 +195,10 @@
             <div style="margin-left:30px;">
             <br />&nbsp;&nbsp;
             <asp:Label ID="TopicLabel" runat="server" Font-Bold="True" Font-Names="Calibri" ForeColor="White" Text="Topic:"></asp:Label>&nbsp;
-            <asp:TextBox ID="TopicTextBox" runat="server" BorderColor="White" BorderStyle="Solid" Height="16px" Width="455px"></asp:TextBox>
+            <asp:TextBox ID="TopicTextBox" runat="server" BorderColor="White" BorderStyle="Solid" Height="16px" Width="455px">Your Topic</asp:TextBox>
             <br />
             <br />&nbsp;&nbsp;
-            <asp:TextBox ID="CommentTextBox" runat="server" BorderColor="White" BorderStyle="Solid" Height="70px" Width="504px">Your first comment to this Topic</asp:TextBox>
+            <asp:TextBox ID="CommentTextBox" runat="server" BorderColor="White" BorderStyle="Solid" Height="70px" Width="504px" TextMode="MultiLine">Your first comment to this Topic</asp:TextBox>
             <br />
             <br />&nbsp;&nbsp;
             <asp:Button ID="PostTopicButton" runat="server" BackColor="#A4D5F7" BorderColor="White" BorderStyle="Solid" Font-Bold="True" Font-Names="Calibri" ForeColor="White" Text="Post" Width="124px" />

@@ -16,7 +16,7 @@ header {
 links{
     font-family:Century Gothic;
     /*use  font "Calibri" in case */
-    color:#0c0c0c;    
+    color:#ffffff;    
 }
 .pointercursor {cursor:pointer}
 .menu  ul {list-style: none;margin: 0;padding: 0;height:auto;}
@@ -76,8 +76,8 @@ footer{
 .copyright{margin:0 auto;text-align:center; padding:10px 0px;width:auto}
 
 /*links style*/
-a{color:#f25151; background-color:transparent; text-decoration:none}
-a:hover{color:#f25151; background-color:transparent; text-decoration:underline}
+a{color:#ffffff; background-color:transparent; text-decoration:none}
+a:hover{color:#fc4141; background-color:transparent; text-decoration:underline}
 
 
 

@@ -24,16 +24,17 @@
         </div>
         <br/><br/>
     </links>
-    <br><br/>
+    <br/><br/>
     <div style="background-color:#ffffff; float:left;margin-left:20px; width: 100%;">
-
-        <asp:Table ID="Table1" runat="server" Height="25px" BorderStyle="Solid" BorderWidth="0px">
+        <div>
+        <asp:Table ID="Table1" runat="server" Height="25px" BorderStyle="Solid" BorderWidth="0px" HorizontalAlign="Center" Width="226px">
         </asp:Table>
+        </div><br/><br/><br/>
 
         <asp:SqlDataSource ID="SqlDataSource1" runat="server"></asp:SqlDataSource>
         <asp:SqlDataSource ID="DSTopic" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT * FROM [Topic]"></asp:SqlDataSource>
 
-    </div><br/><br/><br/><br/><br/>
+    </div><br/><br/>
     
         
     <footer><br/>

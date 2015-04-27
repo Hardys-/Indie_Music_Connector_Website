@@ -66,7 +66,7 @@ public partial class UserProfile : System.Web.UI.Page
                 string NewURL = string.Format("UserProfile.aspx?U={0}&Name={1}", reader2["Id"].ToString(), reader2["Name"].ToString());//redirect to user page
                 string DBFriendAvater = reader2["Pic"].ToString();
                 if (DBFriendAvater == "") { DBFriendAvater= "/images/UserProfile/Default.jpg";} // If user do not have a avater
-                DBFriendsList += "<a href= \"" + NewURL + "\"><img src=\"" + DBFriendAvater + "\" width=\"35\" height=\"35\" /></a>";
+                DBFriendsList += "<a href= \"" + NewURL + "\"><img src=\"" + DBFriendAvater + "\" width=\"35\" height=\"35\" style=\"border:1px; border-color:#a4d5f7\" /></a>";
             }
             conn.Close();
         }
