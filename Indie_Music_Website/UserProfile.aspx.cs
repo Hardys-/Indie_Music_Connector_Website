@@ -20,14 +20,17 @@ public partial class UserProfile : System.Web.UI.Page
         Name = string.Format("{0}", Request.QueryString["Name"]);
 
 
-        /*Searching User Information*/
-        string DBEmail = "";
+        /*Searching User Information Initialization*/
+        int DBUserId = 1;
+        string DBEmail = ""; 
         string DBName = "";
-        string DBGender = "";
+        string DBGender = "F";
         string DBPic = "";
         string DBFriends = "";
-        string dateString1 = "1/1/1970 00:00:00 AM";
-        string dateString2 = "1/1/1970 00:00:00 AM";
+        string dateString1 = "1/1/1988 00:00:00 AM";
+        string dateString2 = "1/1/1988 00:00:00 AM";
+        string DBFriendsList = "Followers: <Br/>"; //pic list of user's friends
+
         String connect = "Data Source=(LocalDB)\\v11.0;AttachDbFilename=|DataDirectory|\\Database.mdf;Integrated Security=True";//connect to our database
         String SQLUser= String.Format("SELECT * FROM Users WHERE (Id) = '{0}' AND (Name) = '{1}'", U, Name); //get the password and username
         using (SqlConnection conn = new SqlConnection(connect))
@@ -37,10 +40,10 @@ public partial class UserProfile : System.Web.UI.Page
             SqlDataReader reader = cmd.ExecuteReader();
             while (reader.Read())     //get all user's information need to be displaied in this page
             {
-                string s = "";
-                DBEmail = reader["Email"].ToString(); //get the Email in DB
-                DBName = reader["Name"].ToString();   //get the Name in DB
-                DBGender = reader["Gender"].ToString();       //get the Gender in DB
+                DBUserId = int.Parse(reader["Id"].ToString()); //get the user Id for later use in friend search
+                DBEmail = reader["Email"].ToString();          //get the Email in DB
+                DBName = reader["Name"].ToString();            //get the Name in DB
+                DBGender = reader["Gender"].ToString();        //get the Gender in DB
                 DBPic = reader["Pic"].ToString();
                 dateString1 = reader["DOB"].ToString();
                 DBFriends = reader["Friends"].ToString();
@@ -49,24 +52,21 @@ public partial class UserProfile : System.Web.UI.Page
             }
             conn.Close();
         } 
-        if( DBPic == "" ){DBPic = "/images/UserProfile/Default.jpg";} // if user did not upload profile pic
-       
+        if( DBPic == "" ){ DBPic = "/images/UserProfile/Default.jpg";} // if user did not upload profile pic
+
         /*Searching Friends information*/
-        String SQLFriend = String.Format("SELECT AlbumName, Cover, PublishedYear FROM Album WHERE (BandName) = '{0}'", DBName); //get the album published by this band
+        String SQLFriend = String.Format("SELECT Pic, Id, Name  FROM Users WHERE Id in (SELECT  User2ID FROM Friends WHERE (User1ID) = '{0}' AND (UserEmail1) = '{1}')", DBUserId, DBEmail); //get the Friend published by this band
         using (SqlConnection conn = new SqlConnection(connect))
-        using (SqlCommand cmd = new SqlCommand(SQLAlbum, conn))
+        using (SqlCommand cmd2 = new SqlCommand(SQLFriend, conn))
         {
             conn.Open();
-            SqlDataReader reader = cmd.ExecuteReader();
-            while (reader.Read())     //get all Album information need to be displaied in this page
+            SqlDataReader reader2 = cmd2.ExecuteReader();
+            while (reader2.Read())     //get all Album information need to be displaied in this page
             {
-                /*Wrap up deta type */
-                string AlbumDateString = reader[2].ToString();
-                DateTime DBAlbumDateTime = DateTime.Parse(AlbumDateString, System.Globalization.CultureInfo.InvariantCulture);
-                string DBAlbumDate = DBAlbumDateTime.Year.ToString() + "-" + DBAlbumDateTime.Month.ToString() + "-" + DBAlbumDateTime.Day.ToString();
-                /*Wrap up deta type */
-
-                DBAlbum += "<img src=\"" + reader[1].ToString() + "\" width=\"35\" height=\"35\" />&nbsp;" + reader[0].ToString() + "&nbsp;<div style=\"font-size:8px\">" + DBAlbumDate + "<br/><br/></div>";
+                string NewURL = string.Format("UserProfile.aspx?U={0}&Name={1}", reader2["Id"].ToString(), reader2["Name"].ToString());//redirect to user page
+                string DBFriendAvater = reader2["Pic"].ToString();
+                if (DBFriendAvater == "") { DBFriendAvater= "/images/UserProfile/Default.jpg";} // If user do not have a avater
+                DBFriendsList += "<a href= \"" + NewURL + "\"><img src=\"" + DBFriendAvater + "\" width=\"35\" height=\"35\" /></a>";
             }
             conn.Close();
         }
@@ -94,16 +94,90 @@ public partial class UserProfile : System.Web.UI.Page
         DateTime DBRegTime = DateTime.Parse(dateString2, System.Globalization.CultureInfo.InvariantCulture); //assign a date type to the string captured in database
 
         UserInfo.Text =
-            "<div style=\"float:left; width: auto\"><div style=\"float:left; width: 35%; margin-left:10px;\"><br/><img src=\""
+            "<div style=\"float:left; width: 80%\"><div style=\"float:left; width: 150; margin-left:20px;\"><br/><br/><img src=\""
             + DBPic + "\" width=\"100\" height=\"100\" /><br/>" +
-            DBName + "</a><br/></div> <div style=\"float:left; margin-left: 30px; width: 50%\"><br/>"
-            + "Followers: " + DBFriends + "<br/> Email: " + DBEmail + "<br/> Gender: " + DBGender +
-            "<br/> Birthday:  " + DBDOB.Date.ToString() + "<br/> Est. " + DBRegTime.Date.ToString() +
-            " </div></div><br/><br/>";
+            DBName + "<br/>Followers: " + DBFriends + "<br/></div> <div style=\"float:left; margin-left: 20px; width: 50%\"><br/><br/>"
+            + "Email: " + DBEmail + "<br/> Gender: " + DBGender +
+            "<br/> Birthday:  " + DBDOB.Month.ToString() + "/" + DBDOB.Day.ToString() + "/" + DBDOB.Year.ToString() + "<br/> Est. " + DBRegTime.Date.ToString() +
+            " </div><div style=\"float:left; margin-left: 20px; width: 40%\"><br/>" + DBFriendsList + "<div></div>";
 
         row.Cells.Add(UserInfo);
         UserTable.Rows.Add(row);
         UserTable.CellPadding = 15;                      // Content Indent
-        UserTable.Style.Add("width", "95% !important"); // Inline percentage of table width
+        UserTable.Style.Add("width", "95% !important");  // Inline percentage of table width
+        //OperationPanel.Style.Add("width", "95% !important");        // Uniform width setting
+        //UpdatePanel.Style.Add("width", "95% !important");           // Uniform width setting
+        //PostTopicPanel.Style.Add("width", "95% !important");        // Uniform width setting
+
+
+        /*-------------------User operations-----------------------*/
+        if (true)    // leave blank for user info check
+        {
+            /*Initial database information*/
+            EmailTextBox.Text = DBEmail;
+            NameTextBox.Text = DBName;
+            if (GenderDropDownList.Items.Contains(new ListItem(DBGender))) GenderDropDownList.Text = DBGender;
+            if (DBDOB.Month.ToString().Length == 1) { DOBMonthDropDownList.Text = "0" + DBDOB.Month.ToString(); } else { DOBMonthDropDownList.Text = DBDOB.Month.ToString(); }
+            if (DBDOB.Day.ToString().Length == 1) { DOBDayDropDownList.Text = "0" + DBDOB.Day.ToString(); } else { DOBDayDropDownList.Text = DBDOB.Day.ToString(); }
+            DOBYearDropDownList.Text = DBDOB.Year.ToString();
+        }
+
+        /*--------------End of User Operations-----------------------*/
     }
+
+
+    protected void RegImageButton_Click(object sender, ImageClickEventArgs e)
+    {
+        /*forecolor initialization*/
+        EmailLabel.ForeColor = Color.Black;
+        NameLabel.ForeColor = Color.Black;
+        ConfirmLabel.ForeColor = Color.Black;
+        PasswordLabel.ForeColor = Color.Black;
+        GenderLabel.ForeColor = Color.Black;
+        DOBLabel.ForeColor = Color.Black;
+
+        if (RegChcek())// insert value if valid
+        {
+            DSUser.Update();
+            InfoLabel.Text = "Your Information has been successfully Updated!";
+        } 
+    }
+
+    protected void UpdateButton_Click(object sender, EventArgs e)
+    {
+        if (UpdatePanel.Visible == false) { UpdatePanel.Visible = true; }
+    }
+
+
+    protected void PostButton_Click(object sender, EventArgs e)
+    {
+        if (PostTopicPanel.Visible == false) { PostTopicPanel.Visible = true; }
+    }
+
+
+    protected bool RegChcek() // check input and if email exists in Database
+    {
+        string DOB = DOBMonthDropDownList.Text + '/' + DOBDayDropDownList.Text + '/' + DOBYearDropDownList.Text;
+
+        /*DOB Check*/
+        DateTime dDate;
+        if (DateTime.TryParse(DOB, out dDate)) { DOBSumLabel.Text = DOB; } //detect date format
+        else { InfoLabel.Text = "Invalid Date of Birth information!"; DOBLabel.ForeColor = Color.Red; return false; }
+
+        /*Name Check*/
+        if (NameTextBox.Text.Length < 20 && NameTextBox.Text != "") { }
+        else { InfoLabel.Text = "Invalid User Name, User name must less than 20 characters "; NameLabel.ForeColor = Color.Red; return false; }
+
+        /*Password confirm Check*/
+        if (PasswordTextBox.Text == ConfirmTextBox.Text && PasswordTextBox.Text != "" && ConfirmTextBox.Text != "") { }
+        else { InfoLabel.Text = "Input Password are different! "; ConfirmLabel.ForeColor = Color.Red; PasswordLabel.ForeColor = Color.Red; return false; }
+
+        /*Email format Check*/
+        if (GenderDropDownList.Text.Contains("M") || GenderDropDownList.Text.Contains("F") || GenderDropDownList.Text.Contains("Other")) { }
+        else { InfoLabel.Text = "Invalid Gender Information! "; GenderLabel.ForeColor = Color.Red; return false; }
+
+        return true;
+    }
+
+
 }

@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head>
+<head  runat="server">
     <link rel="stylesheet" href="css/StyleSheet.css"/>
     <title>SignUp</title>
 </head>
@@ -47,7 +47,7 @@
                 <asp:DropDownList ID="GenderDropDownList" runat="server" Height="20px">
                     <asp:ListItem Value="M">Male</asp:ListItem>
                     <asp:ListItem Value="F">Female</asp:ListItem>
-                    <asp:ListItem>Other</asp:ListItem>
+                    <asp:ListItem Value="Other">Other</asp:ListItem>
                 </asp:DropDownList><br/><br/>
                 <asp:DropDownList ID="DOBMonthDropDownList" runat="server" Height="20px">
                     <asp:ListItem Selected="True">Month</asp:ListItem>

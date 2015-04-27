@@ -2,7 +2,7 @@
 
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head>
+<head  runat="server">
     <link rel="stylesheet" href="css/StyleSheet.css"/>
     <link rel="stylesheet" href="css/responsive.css"/>
     <link rel="stylesheet" href="css/responsiveslides.css" />
