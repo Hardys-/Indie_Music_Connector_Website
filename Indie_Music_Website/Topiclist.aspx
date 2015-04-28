@@ -37,7 +37,7 @@
     </div><br/><br/>
     
         
-    <footer><br/>
+  <%--  <footer><br/>
         <div class="box">
             <div class="box1">
                 <div class="heading">Like us on</div>
@@ -74,7 +74,7 @@
         </div>
         <div class="copyright ">© 2015 Indie Music. All Rights Reserved</div>
 
-    </footer>
+    </footer>--%>
     </form>
 </body>
 </html>

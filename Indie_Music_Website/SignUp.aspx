@@ -154,7 +154,7 @@
 
     </div><br/><br/><br/><br/><br/><br/><br/>
         
-    <footer><br/>
+<%--    <footer><br/>
         <div class="box">
             <div class="box1">
                 <div class="heading">Like us on</div>
@@ -191,7 +191,7 @@
         </div>
         <div class="copyright ">© 2015 Indie Music. All Rights Reserved</div>
 
-    </footer>
+    </footer>--%>
         <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" InsertCommand="INSERT INTO Users(Email, Name, Pic, PW, Gender, DOB, Friends,RegTime) VALUES (@Email, @Name, NULL, @PW, @Gender,@DOB, NULL, @RegTime)" SelectCommand="SELECT * FROM [Users]">
             <InsertParameters>
                 <asp:ControlParameter Name="Email" ControlID="EmailTextBox" PropertyName="Text" />

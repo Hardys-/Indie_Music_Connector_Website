@@ -27,6 +27,7 @@ public partial class BandProfile : System.Web.UI.Page
         string DBContent = "";
         string dateString = "1/1/1970 00:00:00 AM";
         string DBAlbum = "";
+        string DBVideoLink = "";
         String connect = "Data Source=(LocalDB)\\v11.0;AttachDbFilename=|DataDirectory|\\Database.mdf;Integrated Security=True";//connect to our database
         String SQLBand = String.Format("SELECT * FROM Band WHERE (Id) = '{0}' AND (Name) = '{1}'", Id, Name); //get the password and username
         using (SqlConnection conn = new SqlConnection(connect))
@@ -42,6 +43,7 @@ public partial class BandProfile : System.Web.UI.Page
                 DBFollowers = reader["Followers"].ToString();
                 dateString = reader["EstTime"].ToString();
                 DBContent = reader["Content"].ToString();
+                DBVideoLink = reader["VideoLink"].ToString();
             }
             conn.Close();
         }
@@ -96,7 +98,8 @@ public partial class BandProfile : System.Web.UI.Page
             + DBPic + "\" width=\"150\" height=\"150\" /><br/><p style=\"font-size:20px\">"
             + DBName + "</p><br/>Followers: " + DBFollowers + "<br/>Members: " + DBMembers + "<br/>EST. TIME: " + DBEstTime.Year.ToString()
             + "</div> <div style=\"float:left; margin-left: 35px; width: 20%\"><br/>"
-            + DBAlbum + " </div><div style=\"float:left; margin-left: 15px; width: 45%\"><br/> " + DBContent +"</div></div><br/>";
+            + DBAlbum + " </div><div style=\"float:left; margin-left: 15px; width: 45%\"><br/> " + DBContent +"</div></div><br/>" +
+            "<div style=\"float:left; padding-left: 250px; width: 65%\"><iframe width=\"640\" height=\"390\" src=\"" + DBVideoLink + "?autoplay=1\" frameborder=\"0\" allowfullscreen></iframe></div>";
 
         row.Cells.Add(BandInfo);
         BandTable.Rows.Add(row);
