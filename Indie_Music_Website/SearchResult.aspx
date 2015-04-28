@@ -23,15 +23,26 @@
     </links>
     <br/><br/>
     <div style="background-color:#ffffff; float:left;margin-left:2%; width:98%">
+        <div style="margin-left:28px"><br/>
 
-
-
-        <br/><br/>
-        <asp:Label ID="Label1" runat="server" Text="     "></asp:Label>
-        <br/><br/><br/>
-    </div>
+            
+            <asp:TextBox ID="SearchTextBox" runat="server" BorderColor="#A4D5F7" BorderStyle="Solid" Height="23px" style="margin-bottom: 0px" Width="530px"></asp:TextBox>
+            <asp:Button ID="SearchButton" runat="server" BackColor="#A4D5F7" BorderColor="#A4D5F7" BorderStyle="Solid" Font-Bold="True" Font-Names="Calibri" ForeColor="White" Height="29px" Text="Re-Search" OnClick="SearchButton_Click" />
+        </div>
         
-    <footer><br/>
+        <div>
+        
+            
+            <asp:Table ID="SearchTable" runat="server" HorizontalAlign="Center" Width="295px">
+            </asp:Table>
+        
+        
+        </div>
+        <br/><br/>
+        <br/><br/><br/>
+    </div><br/>
+        
+    <div style="margin-bottom:20px"><footer><br/>
         <div class="box">
             <div class="box1">
                 <div class="heading">Like us on</div>
@@ -68,7 +79,7 @@
         </div>
         <div class="copyright ">© 2015 Indie Music. All Rights Reserved</div>
 
-    </footer>
+    </footer></div>
     </form>
 </body>
 </html>

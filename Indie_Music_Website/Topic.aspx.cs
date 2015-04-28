@@ -32,7 +32,7 @@ public partial class Topic : System.Web.UI.Page
                     TableRow row = new TableRow();
                     TableCell Content = new TableCell();
 
-                    string UserURL = "<a href=\"" + string.Format("UserProfile.aspx?U={0}&Name={1}", reader["OwnerId"].ToString(), reader["OwnerName"].ToString()) + " \" target=\"_blank\">";//Open user page in new tab
+                    string UserURL = "<a href=\"" + string.Format("UserProfile.aspx?U={0}&Name={1}", reader["OwnerId"].ToString(), reader["OwnerName"].ToString()) + " \" target=\"_blank\" style=\"color:#000000\">";//Open user page in new tab
 
                     Content.Text = UserURL + "<img src=\"" + GetPicById(int.Parse(reader["OwnerId"].ToString())) + "\" width=\"15\" height=\"15\"/> &nbsp;"
                                     + reader["OwnerName"].ToString() + "</a><br/><br/>"                 //Post owner Info
