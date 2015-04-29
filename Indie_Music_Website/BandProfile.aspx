@@ -37,7 +37,7 @@
             <br/>
             <asp:Table ID="BandTable" runat="server" BorderStyle="None" BorderWidth="0px" HorizontalAlign="Center" Width="243px"> </asp:Table>
         </div>
-        <br/><br/><br/><p style="font-size:18px">Grenn Day</p>
+        <br/><br/><br/>
     </div>
         
     <div>
