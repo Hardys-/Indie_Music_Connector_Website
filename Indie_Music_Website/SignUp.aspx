@@ -152,17 +152,26 @@
 
 
 
+        <asp:Label ID="HashPWLabel" runat="server" Visible="False"></asp:Label>
+
+
+
+
+
+
+
+
     </div><br/><br/><br/><br/><br/><br/><br/>
         
-<%--    <footer><br/>
-        <div class="box">
+ <footer>
+        <div class="box" style="padding:20px;">
             <div class="box1">
                 <div class="heading">Like us on</div>
                 <div class="column">
                     <ul style=" list-style:none;">
-                        <li><a href="http://www.facebook.com/"><img src="./images/Bottom_Fackook_Logo.jpg" style="width:45%" /></a></li>
-                        <li><a href="http://www.google.com/"><img src="./images/Bottom_google_Logo.jpg" style="width:45%" /></a></li>
-                        <li><a href="http://www.twitter.com/"><img src="./images/Bottom_twitter_Logo.jpg" style="width:45%" /></a></li>
+                        <li><a href="http://www.facebook.com/"><img src="./images/Bottom_Fackook_Logo.jpg" style="width:120px; height:30px" /></a></li>
+                        <li><a href="http://www.google.com/"><img src="./images/Bottom_google_Logo.jpg" style="width:120px; height:30px" /></a></li>
+                        <li><a href="http://www.twitter.com/"><img src="./images/Bottom_twitter_Logo.jpg" style="width:120px; height:30px" /></a></li>
                     </ul>
                 </div>
             </div>
@@ -190,13 +199,13 @@
             </div>
         </div>
         <div class="copyright ">© 2015 Indie Music. All Rights Reserved</div>
-
-    </footer>--%>
+        
+    </footer>
         <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" InsertCommand="INSERT INTO Users(Email, Name, Pic, PW, Gender, DOB, Friends,RegTime) VALUES (@Email, @Name, NULL, @PW, @Gender,@DOB, NULL, @RegTime)" SelectCommand="SELECT * FROM [Users]">
             <InsertParameters>
                 <asp:ControlParameter Name="Email" ControlID="EmailTextBox" PropertyName="Text" />
                 <asp:ControlParameter ControlID="NameTextBox" Name="Name" PropertyName="Text" />
-                <asp:ControlParameter ControlID="PasswordTextBox" Name="PW" PropertyName="Text" />
+                <asp:ControlParameter ControlID="HashPWLabel" Name="PW" PropertyName="Text" />
                 <asp:ControlParameter ControlID="DOBSumLabel" Name="DOB" PropertyName="Text" />
                 <asp:ControlParameter ControlID="RegTimeLabel" Name="RegTime" PropertyName="Text" />
                 <asp:ControlParameter ControlID="GenderDropDownList" Name="Gender" PropertyName="SelectedValue" />

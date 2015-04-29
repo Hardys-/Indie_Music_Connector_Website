@@ -12,12 +12,12 @@ public partial class BandProfile : System.Web.UI.Page
 {
     string Id = "";
     string Name = "";
-
+    bool flag = false;
     protected void Page_Load(object sender, EventArgs e)
     {
         Id = string.Format("{0}", Request.QueryString["Id"]);         //get the Band Id
         Name = string.Format("{0}", Request.QueryString["Name"]);   //get the Band Name
-        Button1.Text = Id + "  " + Name;
+
        
         /*Searching Band Information*/
         string DBName = "";
@@ -27,7 +27,7 @@ public partial class BandProfile : System.Web.UI.Page
         string DBContent = "";
         string dateString = "1/1/1970 00:00:00 AM";
         string DBAlbum = "";
-        string DBVideoLink = "";
+        string SelectedAlbumId = "2";
         String connect = "Data Source=(LocalDB)\\v11.0;AttachDbFilename=|DataDirectory|\\Database.mdf;Integrated Security=True";//connect to our database
         String SQLBand = String.Format("SELECT * FROM Band WHERE (Id) = '{0}' AND (Name) = '{1}'", Id, Name); //get the password and username
         using (SqlConnection conn = new SqlConnection(connect))
@@ -43,14 +43,14 @@ public partial class BandProfile : System.Web.UI.Page
                 DBFollowers = reader["Followers"].ToString();
                 dateString = reader["EstTime"].ToString();
                 DBContent = reader["Content"].ToString();
-                DBVideoLink = reader["VideoLink"].ToString();
+                LikeButton.Text = reader["Likes"].ToString() + "  Likes";
             }
             conn.Close();
         }
         if (DBPic == "") { DBPic = "/images/UserProfile/Default.jpg"; } // if Band did not have avatar
        
         /*Searching Album information*/
-        String SQLAlbum = String.Format("SELECT AlbumName, Cover, PublishedYear FROM Album WHERE (BandName) = '{0}'", DBName); //get the album published by this band
+        String SQLAlbum = String.Format("SELECT Id, AlbumName, Cover, PublishedYear FROM Album WHERE (BandName) = '{0}'", DBName); //get the album published by this band
         using (SqlConnection conn = new SqlConnection(connect))
         using (SqlCommand cmd = new SqlCommand(SQLAlbum, conn))
         {
@@ -59,12 +59,12 @@ public partial class BandProfile : System.Web.UI.Page
             while (reader.Read())     //get all Album information need to be displaied in this page
             {
                 /*Wrap up deta type */
-                string AlbumDateString = reader[2].ToString();
+                string AlbumDateString = reader["PublishedYear"].ToString();
                 DateTime DBAlbumDateTime = DateTime.Parse(AlbumDateString, System.Globalization.CultureInfo.InvariantCulture);
                 string DBAlbumDate = DBAlbumDateTime.Year.ToString() + "-" + DBAlbumDateTime.Month.ToString() + "-" + DBAlbumDateTime.Day.ToString();
                 /*Wrap up deta type */
-
-                DBAlbum += "<img src=\"" + reader[1].ToString() + "\" width=\"35\" height=\"35\" />&nbsp;" + reader[0].ToString() + "&nbsp;<div style=\"font-size:8px\">" + DBAlbumDate + "<br/><br/></div>";
+                string AlbumURL = "<a href='#' onclick=\"document.getElementById('Albums').style.display = 'block'\">";
+                DBAlbum += AlbumURL + "<img src=\"" + reader["Cover"].ToString() + "\" width=\"35\" height=\"35\" />&nbsp;" + reader["AlbumName"].ToString() + "</a>&nbsp;<div style=\"font-size:8px\">" + DBAlbumDate + "<br/><br/></div>";
             }
             conn.Close();
         }
@@ -72,7 +72,9 @@ public partial class BandProfile : System.Web.UI.Page
 
         /*display user's information*/
         TableRow row = new TableRow();
+        TableRow PlayerRow = new TableRow();
         TableCell BandInfo = new TableCell();
+        TableCell AlbumInfo = new TableCell();
         TableCell Title = new TableCell();
         TableHeaderRow header = new TableHeaderRow();
 
@@ -98,18 +100,39 @@ public partial class BandProfile : System.Web.UI.Page
             + DBPic + "\" width=\"150\" height=\"150\" /><br/><p style=\"font-size:20px\">"
             + DBName + "</p><br/>Followers: " + DBFollowers + "<br/>Members: " + DBMembers + "<br/>EST. TIME: " + DBEstTime.Year.ToString()
             + "</div> <div style=\"float:left; margin-left: 35px; width: 20%\"><br/>"
-            + DBAlbum + " </div><div style=\"float:left; margin-left: 15px; width: 45%\"><br/> " + DBContent +"</div></div><br/>" +
-            "<div style=\"float:left; padding-left: 250px; width: 65%\"><iframe width=\"640\" height=\"390\" src=\"" + DBVideoLink + "?autoplay=1\" frameborder=\"0\" allowfullscreen></iframe></div>";
+            + DBAlbum + " </div><div style=\"float:left; margin-left: 15px; width: 45%\"><br/> " + DBContent +"</div></div><br/>";
 
         row.Cells.Add(BandInfo);
         BandTable.Rows.Add(row);
+        /*table back color*/
+        string PlayURL = string.Format("Play.aspx?AlbumId={0}", SelectedAlbumId);//URL for Playing
+        AlbumInfo.Text = "<iframe id =\"Albums\" src=\""+PlayURL+"\" runat =\"server\" height =\"600\" width =\"800\" style =\"display:none\"></iframe>";
+        PlayerRow.Cells.Add(AlbumInfo);
+        BandTable.Rows.Add(PlayerRow);
         BandTable.CellPadding = 15;                      // Content Indent
         BandTable.Style.Add("width", "95% !important"); // Inline percentage of table width
 
+        
     }
 
-    protected void Button1_Click(object sender, EventArgs e)
+    protected void LikeButton_Click(object sender, EventArgs e)
     {
-        Button1.Text = "123456";
+        if (!flag) 
+        {
+            flag = true;
+            string nowtime = DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss tt");
+            String connect = "Data Source=(LocalDB)\\v11.0;AttachDbFilename=|DataDirectory|\\Database.mdf;Integrated Security=True";//connect to our database
+            String SQLInsertComment = String.Format("UPDATE Band SET Likes = Likes + 1 WHERE Id = '{0}'", Id);//add likes
+            using (SqlConnection conn = new SqlConnection(connect))
+            using (SqlCommand cmd = new SqlCommand(SQLInsertComment, conn))
+            {
+                conn.Open();
+                cmd.ExecuteNonQuery();
+                conn.Close();
+            }
+   
+        }
+
+
     }
 }

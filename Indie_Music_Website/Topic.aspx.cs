@@ -13,6 +13,8 @@ public partial class Topic : System.Web.UI.Page
     string Id = "";
     string Name = "";
     string TopicTitle = "";
+    string I = "1";
+    int OwnerId =0;
 
      protected void RequestbyID(string id)
     {
@@ -32,8 +34,9 @@ public partial class Topic : System.Web.UI.Page
                     TableRow row = new TableRow();
                     TableCell Content = new TableCell();
 
+                    
                     string UserURL = "<a href=\"" + string.Format("UserProfile.aspx?U={0}&Name={1}", reader["OwnerId"].ToString(), reader["OwnerName"].ToString()) + " \" target=\"_blank\" style=\"color:#000000\">";//Open user page in new tab
-
+                    OwnerId = int.Parse(reader["OwnerId"].ToString());
                     Content.Text = UserURL + "<img src=\"" + GetPicById(int.Parse(reader["OwnerId"].ToString())) + "\" width=\"15\" height=\"15\"/> &nbsp;"
                                     + reader["OwnerName"].ToString() + "</a><br/><br/>"                 //Post owner Info
                                     + reader["Content"].ToString() + "</a><br/><br/>"              // Topic comments
@@ -110,7 +113,10 @@ public partial class Topic : System.Web.UI.Page
     {
         Id = string.Format("{0}", Request.QueryString["Id"]);         //get the topic Id
         Name = string.Format("{0}",  Request.QueryString["Name"]);    // get the user Name
+        
         TopicTitle = string.Format("{0}", Request.QueryString["Title"]);  //get the Topic Title
+        I = string.Format("{0}", Request.QueryString["I"]);
+        if (I != "") { Panel1.Visible = true; } else { Panel1.Visible = false; }
         TableHeaderRow Header = new TableHeaderRow();
         TableCell HeaderContent = new TableCell();
         Header.ForeColor = ColorTranslator.FromHtml("#a4d5f7");
@@ -120,7 +126,90 @@ public partial class Topic : System.Web.UI.Page
         HeaderContent.HorizontalAlign = HorizontalAlign.Left;
         Header.Cells.Add(HeaderContent);
         Table1.Rows.Add(Header);
-        
+        DisplayLikes();
         if (Id != "") { RequestbyID(Id); }    //need to add an access check
+    }
+
+
+    protected void PostCommentButton_Click(object sender, EventArgs e)
+    {
+        string nowtime = DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss tt");
+        String connect = "Data Source=(LocalDB)\\v11.0;AttachDbFilename=|DataDirectory|\\Database.mdf;Integrated Security=True";//connect to our database
+        String SQLInsertComment = "INSERT INTO Comments (TopicId,OwnerId,Likes,PostTime,Content,OwnerName) VALUES(@Topicid, @OwnerId, 0, @nowtime, @Content, @OwnerName)";//insert into Comment table
+        using (SqlConnection conn = new SqlConnection(connect))
+        using (SqlCommand cmd = new SqlCommand(SQLInsertComment, conn))
+        {
+            conn.Open();
+
+            cmd.Parameters.Add("@Topicid", int.Parse(Id));
+            cmd.Parameters.Add("@OwnerId", OwnerId);
+            cmd.Parameters.Add("@nowtime", nowtime);
+            cmd.Parameters.Add("@Content", PostTextBox.Text);
+            cmd.Parameters.Add("@OwnerName", GetNameById(int.Parse(I)));
+            cmd.ExecuteNonQuery();
+            conn.Close();
+        }
+
+        PostTextBox.Text = "";
+        string TopicURL = string.Format("Topic.aspx?Id={0}&Name={1}&Title={2}&I={3}", Id, Name, TopicTitle, int.Parse(I));
+        Response.Redirect(TopicURL);
+
+    }
+
+    protected string GetNameById(int UserID)
+    {
+        string SQLResult = "";
+        String connect = "Data Source=(LocalDB)\\v11.0;AttachDbFilename=|DataDirectory|\\Database.mdf;Integrated Security=True";//connect to our database
+        String SQLFriend = String.Format("SELECT Name FROM Users WHERE Id = {0}", UserID); 
+        using (SqlConnection conn = new SqlConnection(connect))
+        using (SqlCommand cmd = new SqlCommand(SQLFriend, conn))
+        {
+            conn.Open();
+            SqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())     //get all Album information need to be displaied in this page
+            {
+                SQLResult = reader["Name"].ToString();
+                
+            }
+            conn.Close();
+        }
+
+        return SQLResult;
+    }
+
+    protected void LikeButton_Click(object sender, EventArgs e)
+    {
+        string nowtime = DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss tt");
+        String connect = "Data Source=(LocalDB)\\v11.0;AttachDbFilename=|DataDirectory|\\Database.mdf;Integrated Security=True";//connect to our database
+        String SQLInsertComment = String.Format("UPDATE Topic SET Likes = Likes + 1 WHERE Id = '{0}'", Id);//add likes
+        using (SqlConnection conn = new SqlConnection(connect))
+        using (SqlCommand cmd = new SqlCommand(SQLInsertComment, conn))
+        {
+            conn.Open();
+            cmd.ExecuteNonQuery();
+            conn.Close();
+        }
+    }
+
+
+    protected void DisplayLikes()
+    {
+        
+        String connect = "Data Source=(LocalDB)\\v11.0;AttachDbFilename=|DataDirectory|\\Database.mdf;Integrated Security=True";
+        String sql1 = String.Format("SELECT Likes FROM Topic WHERE (Id) = '{0}'", Id); //get the content of the same topic id
+        using (SqlConnection conn = new SqlConnection(connect))
+        using (SqlCommand cmd = new SqlCommand(sql1, conn))
+        {
+            conn.Open();
+            SqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                LikeButton.Text = reader["Likes"].ToString() + "  Likes";           
+            }
+            conn.Close();
+        }
+
+
+
     }
 }

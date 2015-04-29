@@ -42,15 +42,15 @@
         <br/><br/><br/>
     </div><br/>
         
-    <div style="margin-bottom:20px"><footer><br/>
-        <div class="box">
+     <footer>
+        <div class="box" style="padding:20px;">
             <div class="box1">
                 <div class="heading">Like us on</div>
                 <div class="column">
                     <ul style=" list-style:none;">
-                        <li><a href="http://www.facebook.com/"><img src="./images/Bottom_Fackook_Logo.jpg" style="width:45%" /></a></li>
-                        <li><a href="http://www.google.com/"><img src="./images/Bottom_google_Logo.jpg" style="width:45%" /></a></li>
-                        <li><a href="http://www.twitter.com/"><img src="./images/Bottom_twitter_Logo.jpg" style="width:45%" /></a></li>
+                        <li><a href="http://www.facebook.com/"><img src="./images/Bottom_Fackook_Logo.jpg" style="width:120px; height:30px" /></a></li>
+                        <li><a href="http://www.google.com/"><img src="./images/Bottom_google_Logo.jpg" style="width:120px; height:30px" /></a></li>
+                        <li><a href="http://www.twitter.com/"><img src="./images/Bottom_twitter_Logo.jpg" style="width:120px; height:30px" /></a></li>
                     </ul>
                 </div>
             </div>
@@ -78,8 +78,8 @@
             </div>
         </div>
         <div class="copyright ">© 2015 Indie Music. All Rights Reserved</div>
-
-    </footer></div>
+        
+    </footer>
     </form>
 </body>
 </html>

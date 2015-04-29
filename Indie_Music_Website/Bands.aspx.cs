@@ -11,6 +11,7 @@ public partial class Bands : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+
         int i = 0;  // i used for count the number of the row
         DataView dv = (DataView)DSBand.Select(DataSourceSelectArguments.Empty);
         if (dv != null)  //Exception Detect

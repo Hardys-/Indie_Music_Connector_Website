@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Security;
 using System.Windows.Input;
 using System.Web.UI;
 using System.Drawing;
@@ -11,7 +12,6 @@ using System.Web.UI.WebControls;
 public partial class _Default : System.Web.UI.Page
 {
     string U ="" ; //U for tracking the user who Logged in
-
     protected void TryLogin(string Email, string pw) // user id(email) and user password
     {
         try
@@ -20,7 +20,7 @@ public partial class _Default : System.Web.UI.Page
             string DBPW = "";
             string UserId = ""; //only in SQL search to check if user id existed
             String connect = "Data Source=(LocalDB)\\v11.0;AttachDbFilename=|DataDirectory|\\Database.mdf;Integrated Security=True";//connect to our database
-            String SQLNamePW = String.Format("SELECT Id,Name,PW FROM Users WHERE (Email) = '{0}'", Email); //get the password and username
+            String SQLNamePW = String.Format("SELECT Id,Name,PW,Email FROM Users WHERE (Email) = '{0}'", Email); //get the password and username
             using (SqlConnection conn = new SqlConnection(connect))
             using (SqlCommand cmd = new SqlCommand(SQLNamePW, conn))
             {
@@ -37,16 +37,16 @@ public partial class _Default : System.Web.UI.Page
             if (DBPW == pw)    // correct infomation
             {
                 U = UserId;   //U != "" means that user has logged in
-                LogStatusButton.Text = DBName;     //display user name
+                LogStatusButton.Text = DBName;     //display user name           
                 LogStatusButton.ForeColor = ColorTranslator.FromHtml("#fd5b5b");
                 SignUpButton.Text = "|  Log Out";
                 Panel1.Visible = false;
-                UserIdLabel.Text = U ;
+                UserIdLabel.Text = UserId;
             }
             else 
             {
                 UserNameTextBox.Text = "Email or Password may incorrect";
-                PasswordTextBox.Text = "Password may incorrect";
+
             }
 
         }
@@ -60,16 +60,22 @@ public partial class _Default : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
+
         //page redirection check for UserID
         if(U == "") { U = string.Format("{0}", Request.QueryString["U"]);}
         string Name = string.Format("{0}", Request.QueryString["Name"]);
-        if(U !="" && Name != "") // information found
+        HttpCookie myCookie = Request.Cookies["UserId"];
+        if((U !="" && Name != "") )//// information found---------------------------------
         {
                 LogStatusButton.Text = Name;     //display user name
                 LogStatusButton.ForeColor = ColorTranslator.FromHtml("#fd5b5b");
                 SignUpButton.Text = "|  Log Out";
-                Panel1.Visible = false;    
+                Panel1.Visible = false;
+                
         }
+
+            
+
     }
 
 
@@ -88,7 +94,7 @@ public partial class _Default : System.Web.UI.Page
         if (U == "" && LogStatusButton.Text == "Log In") { Panel1.Visible = true;} // not login
         else if (UserIdLabel.Text != ""  &&  LogStatusButton.Text != "Log In") //already login
         {
-            string UserURL = string.Format("UserProfile.aspx?U={0}&Name={1}", UserIdLabel.Text, LogStatusButton.Text);//redirect to user page
+            string UserURL = string.Format("UserProfile.aspx?U={0}&Name={1}&I={2}", UserIdLabel.Text, LogStatusButton.Text, UserIdLabel.Text);//redirect to user page
             Response.Redirect(UserURL);
         }
     }
@@ -113,7 +119,8 @@ public partial class _Default : System.Web.UI.Page
     protected void LogInButton_Click(object sender, EventArgs e)
     {
         string user = UserNameTextBox.Text;
-        string pw =  PasswordTextBox.Text;
+        string pw = FormsAuthentication.HashPasswordForStoringInConfigFile(PasswordTextBox.Text, "SHA1"); ;
         if( U == "" && user != "" && pw != "" ) { TryLogin(user,pw);} //Only can login when user not did that
     }
+
 }

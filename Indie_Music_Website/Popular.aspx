@@ -27,20 +27,32 @@
     <br/><br/>
     <div style="background-color:#ffffff; float:left;margin-left:2%; width:100%">
 
+        <div>
+        <br/><br/>
+            <asp:Table ID="Table1" runat="server" HorizontalAlign="Center">
+            </asp:Table>
+            <asp:Table ID="BandTable" runat="server" HorizontalAlign="Center">
+            </asp:Table>
+            <br/><br/>
+            <asp:SqlDataSource ID="DSTopic" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT * FROM [Topic]"></asp:SqlDataSource>
+            <asp:SqlDataSource ID="DSBand" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT * FROM [Band]"></asp:SqlDataSource>
+            <br/>
 
+
+        </div>
 
         <br/><br/><br/><br/><br/>
     </div>
         
-    <footer><br/>
-        <div class="box">
+    <footer>
+        <div class="box" style="padding:20px;">
             <div class="box1">
                 <div class="heading">Like us on</div>
                 <div class="column">
                     <ul style=" list-style:none;">
-                        <li><a href="http://www.facebook.com/"><img src="./images/Bottom_Fackook_Logo.jpg" style="width:45%" /></a></li>
-                        <li><a href="http://www.google.com/"><img src="./images/Bottom_google_Logo.jpg" style="width:45%" /></a></li>
-                        <li><a href="http://www.twitter.com/"><img src="./images/Bottom_twitter_Logo.jpg" style="width:45%" /></a></li>
+                        <li><a href="http://www.facebook.com/"><img src="./images/Bottom_Fackook_Logo.jpg" style="width:120px; height:30px" /></a></li>
+                        <li><a href="http://www.google.com/"><img src="./images/Bottom_google_Logo.jpg" style="width:120px; height:30px" /></a></li>
+                        <li><a href="http://www.twitter.com/"><img src="./images/Bottom_twitter_Logo.jpg" style="width:120px; height:30px" /></a></li>
                     </ul>
                 </div>
             </div>
@@ -68,7 +80,7 @@
             </div>
         </div>
         <div class="copyright ">© 2015 Indie Music. All Rights Reserved</div>
-
+        
     </footer>
     </form>
 </body>

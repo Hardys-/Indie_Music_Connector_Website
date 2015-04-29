@@ -38,6 +38,12 @@ public partial class SearchResult : System.Web.UI.Page
             else if (Input.Contains("band ") && Input.IndexOf("band ") + 5 != Inlen) { Content.Text = "<br/>Found Bands: <br/><br/>" + SearchBand(Input.Substring(Input.IndexOf("band ") + 5, Inlen - Input.IndexOf("band ") - 5)); }
             else if (Input.Contains("song ") && Input.IndexOf("song ") + 5 != Inlen) { Content.Text = "<br/>Found Songs: <br/><br/>" + SearchSong(Input.Substring(Input.IndexOf("song ") + 5, Inlen - Input.IndexOf("song ") - 5)); }
             else if (Input.Contains("album ") && Input.IndexOf("album ") + 6 != Inlen) { Content.Text = "<br/>Found Albums: <br/><br/>" + SearchAlbum(Input.Substring(Input.IndexOf("album ") + 6, Inlen - Input.IndexOf("album ") - 6)); }
+            else if (Input.Contains("User ") && Input.IndexOf("User ") + 5 != Inlen) { Content.Text = "<br/>Found Users: <br/><br/>" + SearchUser(Input.Substring(Input.IndexOf("User ") + 5, Inlen - Input.IndexOf("User ") - 5)); }
+            else if (Input.Contains("Topic ") && Input.IndexOf("Topic ") + 6 != Inlen) { Content.Text = "<br/>Found Topics: <br/><br/>" + SearchTopic(Input.Substring(Input.IndexOf("Topic ") + 6, Inlen - Input.IndexOf("Topic ") - 6)); }
+            else if (Input.Contains("Comment ") && Input.IndexOf("Comment ") + 8 != Inlen) { Content.Text = "<br/>Found Comments: <br/><br/>" + SearchComment(Input.Substring(Input.IndexOf("Comment ") + 8, Inlen - Input.IndexOf("Comment ") - 8)); }
+            else if (Input.Contains("Band ") && Input.IndexOf("Band ") + 5 != Inlen) { Content.Text = "<br/>Found Bands: <br/><br/>" + SearchBand(Input.Substring(Input.IndexOf("Band ") + 5, Inlen - Input.IndexOf("Band ") - 5)); }
+            else if (Input.Contains("Song ") && Input.IndexOf("Song ") + 5 != Inlen) { Content.Text = "<br/>Found Songs: <br/><br/>" + SearchSong(Input.Substring(Input.IndexOf("Song ") + 5, Inlen - Input.IndexOf("Song ") - 5)); }
+            else if (Input.Contains("Album ") && Input.IndexOf("Album ") + 6 != Inlen) { Content.Text = "<br/>Found Albums: <br/><br/>" + SearchAlbum(Input.Substring(Input.IndexOf("Album ") + 6, Inlen - Input.IndexOf("Album ") - 6)); }
             else
             {
                 Content.Text = "<br/>Found Users: <br/><br/>" + SearchUser(Input) //Comprehensive results

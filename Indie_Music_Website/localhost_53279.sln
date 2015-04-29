@@ -8,20 +8,20 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Indie_Music_Website", "http
 		UseIISExpress = "true"
 		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.5.1"
 		Debug.AspNetCompiler.VirtualPath = "/localhost_53279"
-		Debug.AspNetCompiler.PhysicalPath = "..\Indie_Music_Website\"
+		Debug.AspNetCompiler.PhysicalPath = "..\..\..\..\Desktop\Indie_Music_Connector_Website\Indie_Music_Website\"
 		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_53279\"
 		Debug.AspNetCompiler.Updateable = "true"
 		Debug.AspNetCompiler.ForceOverwrite = "true"
 		Debug.AspNetCompiler.FixedNames = "false"
 		Debug.AspNetCompiler.Debug = "True"
 		Release.AspNetCompiler.VirtualPath = "/localhost_53279"
-		Release.AspNetCompiler.PhysicalPath = "..\Indie_Music_Website\"
+		Release.AspNetCompiler.PhysicalPath = "..\..\..\..\Desktop\Indie_Music_Connector_Website\Indie_Music_Website\"
 		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_53279\"
 		Release.AspNetCompiler.Updateable = "true"
 		Release.AspNetCompiler.ForceOverwrite = "true"
 		Release.AspNetCompiler.FixedNames = "false"
 		Release.AspNetCompiler.Debug = "False"
-		SlnRelativePath = "..\Indie_Music_Website\"
+		SlnRelativePath = "..\..\..\..\Desktop\Indie_Music_Connector_Website\Indie_Music_Website\"
 	EndProjectSection
 EndProject
 Global

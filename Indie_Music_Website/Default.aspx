@@ -27,7 +27,7 @@
     <header style="background-color:#a4d5f7">
         <div style="height: auto; width:auto; margin-top:0px; float:inherit">
             <div style="float:left; width: 765px;">
-                <img src="./images/Logo_header.jpg" />
+                <img src="./images/Logo_header2.jpg" />
             </div>
             <div style="float:right; width:auto">
                 <asp:Button ID="LogStatusButton" runat="server" BackColor="#A4D5F7" BorderColor="White" BorderStyle="None" Font-Bold="True" Font-Names="Calibri" Font-Size="Large" ForeColor="White" Text="Log In" OnClick="LogStatusButton_Click" CssClass="pointercursor" />
@@ -55,9 +55,9 @@
         </div>
     </header><br/><br/>
 
-        <asp:Label ID="UserIdLabel" runat="server" Text="Label"></asp:Label>
+        <asp:Label ID="UserIdLabel" runat="server" ForeColor="Red" Visible="False">UserId</asp:Label>
+        <links>
 
-    <links>
         <div class="menu" style>
             <ul style=" list-style:none;">
                 <li class="current"><a href="Default.aspx">Home</a></li>
@@ -80,7 +80,7 @@
 
     <div style="width:auto;height:auto; margin-left:30px;" >
         <div style="float:left; width:auto;margin-left:30px">
-            <asp:TextBox ID="SearchBar" runat="server" BackColor="White" BorderColor="#A4D5F7" BorderStyle="Solid" BorderWidth="1px" Height="35px" Width="801px" >Search Topics, Bands, or Users you want to know</asp:TextBox>  
+            <asp:TextBox ID="SearchBar" runat="server" BackColor="White" BorderColor="#A4D5F7" BorderStyle="Solid" BorderWidth="1px" Height="35px" Width="900px" >Search Topics, Bands, or Users you want to know</asp:TextBox>  
         </div>
 
         <div style="float:left; width:57px; margin-left:0">
@@ -91,8 +91,8 @@
         
     
     <div id="content">
-        <div class="block01">
-            <div class="heading"><a href="#"><img src="./images/Community_Logo.jpg"></a></div>
+        <div class="block01" style ="height:560px;margin:10px 0;">
+            <div class="heading"><a href="#"><img src="./images/Community_Logo.jpg" style="width:initial;height:initial"></a></div>
             <div class="row">
                 <div class=" community "><a href="#"><h1>Black Dragon:   </h1></a></div>
                 <div class="time"><h2>  - Last post: 13 mins ago</h2></div>
@@ -114,7 +114,7 @@
         </div>
 
         <div class="block02">
-            <div class="cover"><a href="Bands.htm"><img src="./images/cover2.jpg"></a></div>
+            <div class="cover"><a href="Bands.htm"><img src="./images/cover2.jpg" style="height:240px;width:240px"></a></div>
             <div class="info">
                 <br><br>
                 Album: No Turning Back<br><br>
@@ -126,7 +126,7 @@
         </div>
 
         <div class="block02">
-            <div class="cover" style=" float:right"><a href="#"><img src="./images/cover1.jpg"></a></div>
+            <div class="cover" style=" float:right"><a href="#"><img src="./images/cover1.jpg"  style="height:240px;width:240px"></a></div>
             <div class="info" style="float:left">
                 <br><br>
                 Album: Meteor<br><br> 
@@ -138,15 +138,15 @@
         </div>
     </div>
 
-<%--    <footer>
-        <div class="box">
+    <footer>
+        <div class="box" style="padding:20px;">
             <div class="box1">
                 <div class="heading">Like us on</div>
                 <div class="column">
                     <ul style=" list-style:none;">
-                        <li><a href="http://www.facebook.com/"><img src="./images/Bottom_Fackook_Logo.jpg" style="width:45%" /></a></li>
-                        <li><a href="http://www.google.com/"><img src="./images/Bottom_google_Logo.jpg" style="width:45%" /></a></li>
-                        <li><a href="http://www.twitter.com/"><img src="./images/Bottom_twitter_Logo.jpg" style="width:45%" /></a></li>
+                        <li><a href="http://www.facebook.com/"><img src="./images/Bottom_Fackook_Logo.jpg" style="width:120px; height:30px" /></a></li>
+                        <li><a href="http://www.google.com/"><img src="./images/Bottom_google_Logo.jpg" style="width:120px; height:30px" /></a></li>
+                        <li><a href="http://www.twitter.com/"><img src="./images/Bottom_twitter_Logo.jpg" style="width:120px; height:30px" /></a></li>
                     </ul>
                 </div>
             </div>
@@ -175,7 +175,7 @@
         </div>
         <div class="copyright ">© 2015 Indie Music. All Rights Reserved</div>
         
-    </footer>--%>
+    </footer>
     <div>
 
 

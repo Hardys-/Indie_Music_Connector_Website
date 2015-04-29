@@ -12,13 +12,14 @@ public partial class UserProfile : System.Web.UI.Page
 {
     string U = "";
     string Name = "";
+    string I ="";
 
     protected void Page_Load(object sender, EventArgs e)
     {
 
         U = string.Format("{0}", Request.QueryString["U"]);         //get the User Id
         Name = string.Format("{0}", Request.QueryString["Name"]);
-
+        I = string.Format("{0}", Request.QueryString["I"]);
 
         /*Searching User Information Initialization*/
         int DBUserId = 1;
@@ -110,8 +111,10 @@ public partial class UserProfile : System.Web.UI.Page
         //PostTopicPanel.Style.Add("width", "95% !important");        // Uniform width setting
 
 
+        if (I != U) { OperationPanel.Visible = false; }
+
         /*-------------------User operations-----------------------*/
-        if (true)    // leave blank for user info check
+        if ( I == U)    // leave blank for user info check
         {
             /*Initial database information*/
             EmailTextBox.Text = DBEmail;
@@ -145,13 +148,13 @@ public partial class UserProfile : System.Web.UI.Page
 
     protected void UpdateButton_Click(object sender, EventArgs e)
     {
-        if (UpdatePanel.Visible == false) { UpdatePanel.Visible = true; }
+        if (UpdatePanel.Visible == false && I == U) { UpdatePanel.Visible = true; }
     }
 
 
     protected void PostButton_Click(object sender, EventArgs e)
     {
-        if (PostTopicPanel.Visible == false) { PostTopicPanel.Visible = true; }
+        if (PostTopicPanel.Visible == false && I == U) { PostTopicPanel.Visible = true; }
     }
 
 
@@ -180,4 +183,63 @@ public partial class UserProfile : System.Web.UI.Page
     }
 
 
+    protected void PostTopicButton_Click(object sender, EventArgs e)
+    {
+        if(CommentTextBox.Text != "" && TopicTextBox.Text!="")
+        {
+            String connect = "Data Source=(LocalDB)\\v11.0;AttachDbFilename=|DataDirectory|\\Database.mdf;Integrated Security=True";//connect to our database
+            String SQLInsert = "INSERT INTO Topic (Owner,Likes,PostTime,LastTime,Topic,OwnerName) VALUES(@Ownerid,0, @nowtime,@nowtime, @Topic, @OwnerName)";//insert into topic table
+            string nowtime = DateTime.Now.ToString("M/d/yyyy HH:mm:ss tt");
+            using (SqlConnection conn = new SqlConnection(connect))
+            using (SqlCommand cmd = new SqlCommand(SQLInsert, conn))
+            {
+                conn.Open();
+                cmd.Parameters.Add("@Ownerid", int.Parse(I));
+                cmd.Parameters.Add("@nowtime", nowtime);
+                cmd.Parameters.Add("@Topic", TopicTextBox.Text);
+                cmd.Parameters.Add("@OwnerName", Name);
+                cmd.ExecuteNonQuery();
+                conn.Close();
+            }
+
+            String SQLInsertComment = "INSERT INTO Comments (TopicId,OwnerId,Likes,PostTime,Content,OwnerName) VALUES(@Topicid, @OwnerId, 0, @nowtime, @Content, @OwnerName)";//insert into Comment table
+            using (SqlConnection conn = new SqlConnection(connect))
+            using (SqlCommand cmd = new SqlCommand(SQLInsertComment, conn))
+            {
+                conn.Open();
+
+                cmd.Parameters.Add("@Topicid", GetTopicId(TopicTextBox.Text, int.Parse(I)));
+                cmd.Parameters.Add("@OwnerId", int.Parse(I));
+                cmd.Parameters.Add("@nowtime", nowtime);
+                cmd.Parameters.Add("@Content", CommentTextBox.Text);
+                cmd.Parameters.Add("@OwnerName", Name);
+                cmd.ExecuteNonQuery();
+                conn.Close();
+            }
+
+            string TopicURL = string.Format("Topic.aspx?Id={0}&Name={1}&Title={2}&I={3}", GetTopicId(TopicTextBox.Text, int.Parse(I)).ToString(), Name, TopicTextBox.Text,I);
+            Response.Redirect(TopicURL);
+        
+        }
+        
+    }
+
+    protected int GetTopicId(string T, int OID)// topic & OwnerId(UserId)
+    {
+        int ResultTopicId = 0;
+        String connect = "Data Source=(LocalDB)\\v11.0;AttachDbFilename=|DataDirectory|\\Database.mdf;Integrated Security=True";//connect to our database
+        String SQLUser = String.Format("SELECT Id FROM Topic WHERE (Topic = '{0}') AND (Owner = '{1}')", T, OID); //get the password and username
+        using (SqlConnection conn = new SqlConnection(connect))
+        using (SqlCommand cmd = new SqlCommand(SQLUser, conn))
+        {
+            conn.Open();
+            SqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())     //get all user's information need to be displaied in this page
+            {
+                ResultTopicId = (int)reader["Id"];
+            }
+            conn.Close();
+        } 
+        return ResultTopicId;
+    }
 }

@@ -29,31 +29,35 @@
         <br/><br/>
 
         <div>
+            <br/>
+             &nbsp;&nbsp;&nbsp;&nbsp;<asp:Button ID="LikeButton" runat="server" OnClick="LikeButton_Click" Text="Likes" BackColor="White" BorderStyle="None" Font-Bold="True" Font-Names="Calibri" ForeColor="#4498D2" style="height: 21px" />
+            <br/>
         <asp:Table ID="Table1" runat="server" BorderStyle="None" BorderWidth="0px" HorizontalAlign="Center" Width="468px" Font-Names="Calibri" Font-Size="Medium" style="margin-left: 0px">
         </asp:Table>
         </div>
 
         <br/><br/>
         <asp:Panel ID="Panel1" runat="server">
+            &nbsp;&nbsp;&nbsp;&nbsp;
             <asp:TextBox ID="PostTextBox" runat="server" BorderColor="#A4D5F7" BorderStyle="Solid" Height="78px" TextMode="MultiLine" Width="616px"></asp:TextBox>
             <br />
-            <br />
-            <asp:Button ID="PostCommentButton" runat="server" BackColor="White" BorderColor="#A4D5F7" BorderStyle="Solid" Font-Bold="True" Font-Names="Calibri" ForeColor="#4498D2" Text="Post Comment" />
+            <br />&nbsp;&nbsp;&nbsp;&nbsp;
+            <asp:Button ID="PostCommentButton" runat="server" BackColor="White" BorderColor="#A4D5F7" BorderStyle="Solid" Font-Bold="True" Font-Names="Calibri" ForeColor="#4498D2" Text="Post Comment" OnClick="PostCommentButton_Click" />
             <br />
         </asp:Panel>
         <br/>
         <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT * FROM [Comments]"></asp:SqlDataSource>
     </div>
         
-    <footer><br/>
-        <div class="box">
+ <footer>
+        <div class="box" style="padding:20px;">
             <div class="box1">
                 <div class="heading">Like us on</div>
                 <div class="column">
                     <ul style=" list-style:none;">
-                        <li><a href="http://www.facebook.com/"><img src="./images/Bottom_Fackook_Logo.jpg" style="width:45%" /></a></li>
-                        <li><a href="http://www.google.com/"><img src="./images/Bottom_google_Logo.jpg" style="width:45%" /></a></li>
-                        <li><a href="http://www.twitter.com/"><img src="./images/Bottom_twitter_Logo.jpg" style="width:45%" /></a></li>
+                        <li><a href="http://www.facebook.com/"><img src="./images/Bottom_Fackook_Logo.jpg" style="width:120px; height:30px" /></a></li>
+                        <li><a href="http://www.google.com/"><img src="./images/Bottom_google_Logo.jpg" style="width:120px; height:30px" /></a></li>
+                        <li><a href="http://www.twitter.com/"><img src="./images/Bottom_twitter_Logo.jpg" style="width:120px; height:30px" /></a></li>
                     </ul>
                 </div>
             </div>
@@ -81,7 +85,7 @@
             </div>
         </div>
         <div class="copyright ">© 2015 Indie Music. All Rights Reserved</div>
-
+        
     </footer>
     </form>
 </body>

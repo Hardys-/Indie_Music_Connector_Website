@@ -12,7 +12,12 @@
     <header>
         <div><a href="#"><img src="./images/Logo_header.jpg" /></a></div>
     </header>
-
+    <!--    <div>
+        <audio controls = "controls">
+            <source src="test_music.mp3" type="audio/mpeg"/>
+            Your browser does not support the audio element.
+        </audio>
+    </div>-->
     <links>
         <div class="menu">
             <ul style=" list-style:none;">
@@ -27,24 +32,26 @@
 
     <div style="background-color:#ffffff; float:left;margin-left:2%; width:98%">
         <div>
+            <br/>
+             &nbsp;&nbsp;&nbsp;&nbsp;<asp:Button ID="LikeButton" runat="server" OnClick="LikeButton_Click" Text="Likes" BackColor="White" BorderStyle="None" Font-Bold="True" Font-Names="Calibri" ForeColor="#4498D2" style="height: 21px" />
+            <br/>
             <asp:Table ID="BandTable" runat="server" BorderStyle="None" BorderWidth="0px" HorizontalAlign="Center" Width="243px"> </asp:Table>
         </div>
         <br/><br/><br/><p style="font-size:18px">Grenn Day</p>
     </div>
         
     <div>
-    <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Button" />
     </div>
 
-    <footer><br/>
-        <div class="box">
+ <footer>
+        <div class="box" style="padding:20px;">
             <div class="box1">
                 <div class="heading">Like us on</div>
                 <div class="column">
                     <ul style=" list-style:none;">
-                        <li><a href="http://www.facebook.com/"><img src="./images/Bottom_Fackook_Logo.jpg" style="width:45%" /></a></li>
-                        <li><a href="http://www.google.com/"><img src="./images/Bottom_google_Logo.jpg" style="width:45%" /></a></li>
-                        <li><a href="http://www.twitter.com/"><img src="./images/Bottom_twitter_Logo.jpg" style="width:45%" /></a></li>
+                        <li><a href="http://www.facebook.com/"><img src="./images/Bottom_Fackook_Logo.jpg" style="width:120px; height:30px" /></a></li>
+                        <li><a href="http://www.google.com/"><img src="./images/Bottom_google_Logo.jpg" style="width:120px; height:30px" /></a></li>
+                        <li><a href="http://www.twitter.com/"><img src="./images/Bottom_twitter_Logo.jpg" style="width:120px; height:30px" /></a></li>
                     </ul>
                 </div>
             </div>
@@ -72,7 +79,8 @@
             </div>
         </div>
         <div class="copyright ">© 2015 Indie Music. All Rights Reserved</div>
-    </footer>       
+        
+    </footer>      
     </form>
 </body>
 </html>

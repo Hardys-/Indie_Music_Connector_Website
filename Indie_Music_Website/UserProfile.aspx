@@ -201,7 +201,7 @@
             <asp:TextBox ID="CommentTextBox" runat="server" BorderColor="White" BorderStyle="Solid" Height="70px" Width="504px" TextMode="MultiLine">Your first comment to this Topic</asp:TextBox>
             <br />
             <br />&nbsp;&nbsp;
-            <asp:Button ID="PostTopicButton" runat="server" BackColor="#A4D5F7" BorderColor="White" BorderStyle="Solid" Font-Bold="True" Font-Names="Calibri" ForeColor="White" Text="Post" Width="124px" />
+            <asp:Button ID="PostTopicButton" runat="server" BackColor="#A4D5F7" BorderColor="White" BorderStyle="Solid" Font-Bold="True" Font-Names="Calibri" ForeColor="White" Text="Post" Width="124px" OnClick="PostTopicButton_Click" />
             </div>
             <br />
             <br />
@@ -209,31 +209,28 @@
         </asp:Panel>
         </div>
 
-        <asp:SqlDataSource ID="DSUser" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT * FROM User" UpdateCommand="UPDATE Users SET  Name = @Name, PW = @PW, Gender= @Gender, DOB = @DOB  WHERE Email = @Email">
-            <SelectParameters>
-                <asp:Parameter Name="UserId" />
-                <asp:Parameter Name="UserName" />
-            </SelectParameters>
+        <asp:SqlDataSource ID="DSUser" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString %>" SelectCommand="SELECT * FROM User" UpdateCommand="UPDATE Users SET  Name = @Name, PW = @PW, Gender= @Gender, DOB = @DOB  WHERE Email = @Email" InsertCommand="INSERT INTO">
             <UpdateParameters>
-                <asp:ControlParameter ControlID="EmailTextBox" Name="Email" PropertyName="Text" />
                 <asp:ControlParameter ControlID="NameTextBox" Name="Name" PropertyName="Text" />
                 <asp:ControlParameter ControlID="PasswordTextBox" Name="PW" PropertyName="Text" />
                 <asp:ControlParameter ControlID="GenderDropDownList" Name="Gender" PropertyName="SelectedValue" />
                 <asp:ControlParameter ControlID="DOBSumLabel" Name="DOB" PropertyName="Text" />
+                <asp:ControlParameter ControlID="EmailTextBox" Name="Email" PropertyName="Text" />
             </UpdateParameters>
         </asp:SqlDataSource>
 
         <br/><br/>
     </div>
         
-    <footer><br/>
-        <div class="box">
+ <footer>
+        <div class="box" style="padding:20px;">
             <div class="box1">
-                <div class="heading">Like us on          <div class="column">
+                <div class="heading">Like us on</div>
+                <div class="column">
                     <ul style=" list-style:none;">
-                        <li><a href="http://www.facebook.com/"><img src="./images/Bottom_Fackook_Logo.jpg" style="width:45%" /></a></li>
-                        <li><a href="http://www.google.com/"><img src="./images/Bottom_google_Logo.jpg" style="width:45%" /></a></li>
-                        <li><a href="http://www.twitter.com/"><img src="./images/Bottom_twitter_Logo.jpg" style="width:45%" /></a></li>
+                        <li><a href="http://www.facebook.com/"><img src="./images/Bottom_Fackook_Logo.jpg" style="width:120px; height:30px" /></a></li>
+                        <li><a href="http://www.google.com/"><img src="./images/Bottom_google_Logo.jpg" style="width:120px; height:30px" /></a></li>
+                        <li><a href="http://www.twitter.com/"><img src="./images/Bottom_twitter_Logo.jpg" style="width:120px; height:30px" /></a></li>
                     </ul>
                 </div>
             </div>
@@ -261,7 +258,7 @@
             </div>
         </div>
         <div class="copyright ">© 2015 Indie Music. All Rights Reserved</div>
-
+        
     </footer>
     </form>
 </body>

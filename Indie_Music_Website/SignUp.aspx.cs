@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Security;
 using System.Drawing;
 using System.Web.UI;
 using System.Data.SqlClient;
@@ -79,9 +80,11 @@ public partial class SignUp : System.Web.UI.Page
         DOBLabel.ForeColor = Color.Black;
 
         if (RegChcek())// insert value if valid
-        {               
+        {
+            HashPWLabel.Text = FormsAuthentication.HashPasswordForStoringInConfigFile( PasswordTextBox.Text, "SHA1"); 
             SqlDataSource1.Insert();
             Id = sqlqueryid(EmailTextBox.Text); //get the Id
+            FormsAuthentication.RedirectFromLoginPage(NameTextBox.Text, false);
             string URL = string.Format("Default.aspx?U={0}&Name={1}", Id, NameTextBox.Text);
             EmailLabel.Visible = false;
             NameLabel.Visible = false;
