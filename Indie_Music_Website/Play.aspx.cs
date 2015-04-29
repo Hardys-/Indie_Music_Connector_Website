@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Data.SqlClient;
 using System.Web;
+using System.Drawing;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -34,7 +35,10 @@ public partial class Play : System.Web.UI.Page
             }
             conn.Close();
         }
-        
+
+        MusicInfo.ForeColor = ColorTranslator.FromHtml("#a4d5f7");
+        MusicInfo.Font.Bold = true;
+        MusicInfo.Font.Name = "Calibri";
         row.Cells.Add(MusicInfo);
         Table1.Rows.Add(row);   
 

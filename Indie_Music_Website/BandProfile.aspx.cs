@@ -12,12 +12,13 @@ public partial class BandProfile : System.Web.UI.Page
 {
     string Id = "";
     string Name = "";
+    string SelectedAlbumId = "2";
     bool flag = false;
     protected void Page_Load(object sender, EventArgs e)
     {
         Id = string.Format("{0}", Request.QueryString["Id"]);         //get the Band Id
         Name = string.Format("{0}", Request.QueryString["Name"]);   //get the Band Name
-
+        SelectedAlbumId = string.Format("{0}", Request.QueryString["SelectedAlbumId"]);   //get the Band Name
        
         /*Searching Band Information*/
         string DBName = "";
@@ -27,7 +28,6 @@ public partial class BandProfile : System.Web.UI.Page
         string DBContent = "";
         string dateString = "1/1/1970 00:00:00 AM";
         string DBAlbum = "";
-        string SelectedAlbumId = "2";
         String connect = "Data Source=(LocalDB)\\v11.0;AttachDbFilename=|DataDirectory|\\Database.mdf;Integrated Security=True";//connect to our database
         String SQLBand = String.Format("SELECT * FROM Band WHERE (Id) = '{0}' AND (Name) = '{1}'", Id, Name); //get the password and username
         using (SqlConnection conn = new SqlConnection(connect))
@@ -63,7 +63,8 @@ public partial class BandProfile : System.Web.UI.Page
                 DateTime DBAlbumDateTime = DateTime.Parse(AlbumDateString, System.Globalization.CultureInfo.InvariantCulture);
                 string DBAlbumDate = DBAlbumDateTime.Year.ToString() + "-" + DBAlbumDateTime.Month.ToString() + "-" + DBAlbumDateTime.Day.ToString();
                 /*Wrap up deta type */
-                string AlbumURL = "<a href='#' onclick=\"document.getElementById('Albums').style.display = 'block'\">";
+                string RedirectURL = string.Format("BandProfile.aspx?Id={0}&Name={1}&SelectedAlbumId={2}", Id, Name,reader["Id"].ToString());
+                string AlbumURL = "<a href=\""+RedirectURL+"\">";
                 DBAlbum += AlbumURL + "<img src=\"" + reader["Cover"].ToString() + "\" width=\"35\" height=\"35\" />&nbsp;" + reader["AlbumName"].ToString() + "</a>&nbsp;<div style=\"font-size:8px\">" + DBAlbumDate + "<br/><br/></div>";
             }
             conn.Close();
@@ -105,8 +106,9 @@ public partial class BandProfile : System.Web.UI.Page
         row.Cells.Add(BandInfo);
         BandTable.Rows.Add(row);
         /*table back color*/
+
         string PlayURL = string.Format("Play.aspx?AlbumId={0}", SelectedAlbumId);//URL for Playing
-        AlbumInfo.Text = "<iframe id =\"Albums\" src=\""+PlayURL+"\" runat =\"server\" height =\"600\" width =\"800\" style =\"display:none\"></iframe>";
+        AlbumInfo.Text = "<iframe id =\"Albums\" src=\""+PlayURL+"\" runat =\"server\" height =\"600\" width =\"800\"></iframe>";
         PlayerRow.Cells.Add(AlbumInfo);
         BandTable.Rows.Add(PlayerRow);
         BandTable.CellPadding = 15;                      // Content Indent
