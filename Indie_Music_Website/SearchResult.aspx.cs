@@ -255,7 +255,7 @@ public partial class SearchResult : System.Web.UI.Page
                     if (Picpath == "") { Picpath = "/images/UserProfile/Default.jpg"; }
                     string UserURL = "<a href=\"" + string.Format("UserProfile.aspx?U={0}&Name={1}", reader["Id"].ToString(), reader["Name"].ToString()) + " \" target=\"_blank\" style=\"color:#626262\">";//Open user page in new tab
                     SQLResult += UserURL + "<img src = \"" + Picpath + "\" width=\"15\" height=\"15\" /> &nbsp;"
-                             + SearchRecolor(reader["Name"].ToString(), InputString) + "&nbsp;" + SearchRecolor(reader["Email"].ToString(), InputString) + "</a><br/><br/>";
+                             + SearchRecolor(reader["Name"].ToString(), InputString) + "&nbsp;" + SearchRecolor(reader["Email"].ToString(), InputString) + "</a><br/><br/><hr/>";
                 }
                 else{SQLResult = "Nothing found of Users that contain \""+InputString+"\" !";}               
             }
@@ -283,7 +283,7 @@ public partial class SearchResult : System.Web.UI.Page
                     string Picpath = GetPicById(int.Parse(reader["Owner"].ToString()));
                     string UserURL = "<a href=\"" + string.Format("Topic.aspx?Id={0}&Name={1}&Title={2}", reader["Id"].ToString(), reader["OwnerName"].ToString(), reader["Topic"].ToString()) + " \" target=\"_blank\" style=\"color:#626262\">";//Open Topic page in new tab
                     SQLResult += UserURL + "<img src = \"" + Picpath + "\" width=\"15\" height=\"15\" /> &nbsp;"
-                             + SearchRecolor(reader["OwnerName"].ToString(), InputString) + "<br/>&nbsp;" + SearchRecolor(reader["Topic"].ToString(), InputString) + "</a><br/><br/>";
+                             + SearchRecolor(reader["OwnerName"].ToString(), InputString) + "<br/>&nbsp;" + SearchRecolor(reader["Topic"].ToString(), InputString) + "</a><br/><br/><hr/>";
                 }
                 else { SQLResult = "Nothing found of Topics that contain \"" + InputString + "\" !"; }
             }
@@ -311,7 +311,7 @@ public partial class SearchResult : System.Web.UI.Page
                     string Picpath = GetPicById(int.Parse(reader["OwnerId"].ToString()));
                     string UserURL = "<a href=\"" + string.Format("Topic.aspx?Id={0}&Name={1}&Title={2}", reader["TopicId"].ToString(), GetTopicOwnerNameById(int.Parse(reader["TopicId"].ToString())), GetTopicNameById(int.Parse(reader["TopicId"].ToString()))) + " \" target=\"_blank\" style=\"color:#626262\">";//Open Topic page in new tab
                     SQLResult += UserURL + "<img src = \"" + Picpath + "\" width=\"15\" height=\"15\" /> &nbsp;"
-                             + SearchRecolor(reader["OwnerName"].ToString(), InputString) + "<br/>&nbsp;" + SearchRecolor(reader["Content"].ToString(), InputString) + "</a><br/><br/>";
+                             + SearchRecolor(reader["OwnerName"].ToString(), InputString) + "<br/>&nbsp;" + SearchRecolor(reader["Content"].ToString(), InputString) + "</a><br/><br/><hr/>";
                 }
                 else { SQLResult = "Nothing found of Comment that contain \"" + InputString + "\" !"; }
             }
@@ -341,7 +341,7 @@ public partial class SearchResult : System.Web.UI.Page
                     if (Picpath == "") { Picpath = "/images/UserProfile/Default.jpg"; }
                     string UserURL = "<a href=\"" + string.Format("BandProfile.aspx?Id={0}&Name={1}", reader["Id"].ToString(), reader["Name"].ToString()) +" \" target=\"_blank\" style=\"color:#626262\">";//Open user page in new tab
                     SQLResult += UserURL + "<img src = \"" + Picpath + "\" width=\"15\" height=\"15\" /> &nbsp;"
-                             + SearchRecolor(reader["Name"].ToString(), InputString) + "<br/>" + SearchRecolor(reader["Content"].ToString(), InputString) + "</a><br/><br/>";
+                             + SearchRecolor(reader["Name"].ToString(), InputString) + "<br/>" + SearchRecolor(reader["Content"].ToString(), InputString) + "</a><br/><br/><hr/>";
                 }
                 else { SQLResult = "Nothing found of Bands that contain \"" + InputString + "\" !"; }
             }
@@ -370,7 +370,7 @@ public partial class SearchResult : System.Web.UI.Page
                     
                     SQLResult += GetBandURLByBandName(GetBandNameByAlbumId(int.Parse(reader["Album"].ToString())))
                                  + "<br/>Album: " + GetAlbumPicNameByAlbumID(int.Parse(reader["Album"].ToString())) + ": &nbsp;&nbsp;"
-                                 + SearchRecolor(reader["Name"].ToString(), InputString)  + "</a><br/><br/>";
+                                 + SearchRecolor(reader["Name"].ToString(), InputString)  + "</a><br/><br/><hr/>";
                 }
                 else { SQLResult = "Nothing found of Songs that contain \"" + InputString + "\" !"; }
             }
@@ -399,7 +399,7 @@ public partial class SearchResult : System.Web.UI.Page
                     if (Picpath == "") { Picpath = "/images/UserProfile/Default.jpg"; }
                     string UserURL = GetBandURLByBandName(reader["BandName"].ToString());
                     SQLResult += UserURL + "<br/><img src = \"" + Picpath + "\" width=\"15\" height=\"15\" /> &nbsp;"
-                             + SearchRecolor(reader["AlbumName"].ToString(), InputString) +"<br/><br/>";
+                             + SearchRecolor(reader["AlbumName"].ToString(), InputString) +"<br/><br/><hr/>";
                 }
                 else { SQLResult = "Nothing found of Bands that contain \"" + InputString + "\" !"; }
             }
