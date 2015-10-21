@@ -1,4 +1,4 @@
-# Indie-Music-Group-Front---end
+# Indie-Music-Connector-Website(C#)
 <h3>Description:</h3>
 <p>Our goals are use the software engineering based model, idea, standard procedures to implement a music website. We choose HTML, JavaScript, CSS for the front-end language, and C# and SQL Server 2012 as back-end database. Our website enable fans to connect to their favorite music bands, follow other users, post topic and comments on certain events. We also implemented music play option, and a build-in searching engine.</p>
 <br/>
